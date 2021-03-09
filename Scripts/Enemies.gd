@@ -39,24 +39,3 @@ class Enemy extends Reference:
 		
 		if hp == 0:
 			dead = true
-	
-#	func act(game):
-#		if sprite_node.visible:
-#			var self_point = game.enemy_pathfinding.get_closest_point(Vector3(tile.x,tile.y,0))
-#			var player_point = game.enemy_pathfinding.get_closest_point(Vector3(game.player_tile.x, game.player_tile.y, 0))
-#			var path = game.enemy_pathfinding.get_point_path(self_point, player_point)
-#			if path:
-#				assert(path.size() > 1)
-#				var move_tile = Vector2(path[1].x, path[1].y)
-#
-#				if move_tile == game.player_tile:
-#					game.damage_player(1)
-#				else:
-#					var blocked = false
-#					for enemy in game.enemies:
-#						if enemy.tile == move_tile:
-#							blocked = true
-#							break
-#
-#					if !blocked:
-#						tile = move_tile

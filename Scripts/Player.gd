@@ -1,9 +1,10 @@
 extends Sprite
-#class_name Player
 
 var max_hp = 1000
 var strength = 2
 var hp = max_hp
+
+signal turn_advance
 
 func _input(event):
 	if !event.is_pressed():
@@ -28,7 +29,6 @@ func _input(event):
 
 func try_move(dx,dy):
 	
-#	var game = get_node("Game")
 	var game = get_parent()
 	
 	
@@ -56,6 +56,7 @@ func try_move(dx,dy):
 					break
 			if !blocked:
 				game.player_tile = Vector2(x,y)
+			emit_signal("turn_advance")
 #			for enemy in game.enemies:
 #				enemy.act(self)
 		game.tile_ladder:

@@ -457,3 +457,8 @@ func _on_Button_pressed():
 	build_level()
 	$HUD/EndScreen.visible = false
 	Player.hp = Player.max_hp
+
+
+func _on_Player_turn_advance():
+	for enemy in enemies:
+		enemy.sprite_node.act(self,enemy)

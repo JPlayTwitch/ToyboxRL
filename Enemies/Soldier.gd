@@ -8,3 +8,6 @@ export(int) var dmg = 5
 export(int) var weighting = 3
 export(int) var vision = 10
 export(int) var evasion = 5
+
+func act(game,tile):
+	pass

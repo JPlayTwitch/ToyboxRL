@@ -145,4 +145,5 @@ margin_top = 416.0
 margin_right = 672.0
 margin_bottom = 448.0
 text = "Reset"
+[connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]
