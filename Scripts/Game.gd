@@ -220,7 +220,7 @@ func update_visuals():
 			y_dir = 1 if y < player_tile.y else -1
 			test_point = tile_to_pixel_center(x, y) + Vector2(x_dir, y_dir) * TILE_SIZE / 2
 			
-			var occlusion = space_state.intersect_ray(player_center, test_point)
+			var occlusion = space_state.intersect_ray(player_center, test_point, [self], 0b1)
 			
 			if !occlusion || (occlusion.position - test_point).length() < 0.1:
 				visibility_map.set_cell(x, y, Visibility.Visible)

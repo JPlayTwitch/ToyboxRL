@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sprites/Enemies/Teddy.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Teddy.gd" type="Script" id=2]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
 [node name="Teddy" type="Sprite"]
+visible = false
 position = Vector2( 96, 512 )
 texture = ExtResource( 1 )
 centered = false
@@ -17,3 +21,10 @@ color = Color( 0.290196, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
