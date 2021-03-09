@@ -17,7 +17,7 @@ class Enemy extends Reference:
 			EnemyTypes.Teddy:
 				sprite_node = EnemyTeddy.instance()
 			EnemyTypes.Soldier:
-				sprite_node = EnemyTeddy.instance()
+				sprite_node = EnemySoldier.instance()
 			_:
 				sprite_node = EnemyTeddy.instance()
 		max_hp = sprite_node.max_hp

@@ -26,7 +26,7 @@ var Player = PlayerScn.instance()
 
 
 #Enemies
-const LEVEL_ENEMY_COUNTS = [9,15,21,27,30]
+const LEVEL_ENEMY_PTS = [19,45,81,97,130]
 var Enemies = preload("res://Scripts/Enemies.gd")
 
 
@@ -141,8 +141,8 @@ func build_level():
 		set_tile(ladder_x,ladder_y,tile_amulet)
 	
 	# Place Enemies
-	var num_enemies = LEVEL_ENEMY_COUNTS[level_num]
-	for _i in range(num_enemies):
+	var num_enemies = LEVEL_ENEMY_PTS[level_num]
+	while num_enemies > 0:
 		var room = rooms[1 + randi() % (rooms.size() - 1)]
 		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
 		var y = room.position.y + 1 + randi() % int(room.size.y - 2)
@@ -153,22 +153,14 @@ func build_level():
 				blocked == true
 				break
 		
+		var enemy_type = randi()%2
+		
 		if !blocked:
-			var enemy = Enemies.Enemy.new(self,0,x,y)
+			var enemy = Enemies.Enemy.new(self,enemy_type,x,y)
+			num_enemies -= enemy.sprite_node.weighting
 			enemies.append(enemy)
 	
 	$HUD/Level.text = "Level: " + str(level_num+1)
-
-#func make_diagonals():
-#	for x in range (1,level_size.x - 1):
-#		for y in range (1,level_size.y - 1):
-#			if map[x][y] == tile_wall:
-#				match map[x-1][y]:
-#					tile_wall, tile_wall_ul, tile_wall_ur, tile_wall_dl, tile_wall_dr, tile_stone:
-#						match map[x][y-1]:
-#							tile_wall, tile_wall_ul, tile_wall_ur, tile_wall_dl, tile_wall_dr, tile_stone:
-#								if map[x][y+1] == tile_floor && map[x+1][y] == tile_floor:
-#									set_tile(x,y,tile_wall_ul)
 
 func clear_path(tile):
 	var new_point = enemy_pathfinding.get_available_point_id()
@@ -459,11 +451,6 @@ func set_tile(x, y, type):
 	match type:
 		tile_floor:
 			clear_path(Vector2(x,y))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _on_Button_pressed():
 	level_num = 0
