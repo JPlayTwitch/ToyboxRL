@@ -462,3 +462,4 @@ func _on_Button_pressed():
 func _on_Player_turn_advance():
 	for enemy in enemies:
 		enemy.sprite_node.act(self,enemy)
+	update_visuals()

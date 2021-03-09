@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/MessageLog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Visibility/Visibility_Undiscovered.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Visibility/Visibility_Visible.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Visibility/Visibility_Fog.png" type="Texture" id=10]
@@ -145,5 +146,7 @@ margin_top = 416.0
 margin_right = 672.0
 margin_bottom = 448.0
 text = "Reset"
+
+[node name="MessageLog" parent="." instance=ExtResource( 4 )]
 [connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]

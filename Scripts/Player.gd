@@ -26,6 +26,8 @@ func _input(event):
 		try_move(0,1)
 	elif event.is_action("DownLeft"):
 		try_move(-1,1)
+	elif event.is_action("Wait"):
+		emit_signal("turn_advance")
 
 func try_move(dx,dy):
 	
@@ -57,8 +59,6 @@ func try_move(dx,dy):
 			if !blocked:
 				game.player_tile = Vector2(x,y)
 			emit_signal("turn_advance")
-#			for enemy in game.enemies:
-#				enemy.act(self)
 		game.tile_ladder:
 			game.level_num += 1
 			game.build_level()

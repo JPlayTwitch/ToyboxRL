@@ -1,0 +1,31 @@
+[gd_scene format=2]
+
+[node name="MessageLog" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 96.0
+margin_right = 768.0
+margin_bottom = 96.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MLogText" type="RichTextLabel" parent="."]
+margin_left = 106.0
+margin_top = 10.0
+margin_right = 768.0
+margin_bottom = 96.0
+bbcode_enabled = true
+bbcode_text = "New game
+
+
+"
+text = "New game
+
+
+"
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -4,7 +4,8 @@ extends Sprite
 
 export(int) var max_hp = 13
 onready var hp = max_hp
-export(int) var dmg = 5
+export(int) var strength = 1
+export(int) var attack_dice = 4
 export(int) var weighting = 3
 export(int) var vision = 10
 export(int) var evasion = 5
@@ -60,6 +61,9 @@ func act(game,me):
 			var occlusion = space_state.intersect_ray(player_center, test_point, [self], 0b1)
 			
 			if !occlusion || (occlusion.position - test_point).length() < 0.1:
+				var dmg = randi() % attack_dice + strength
+				var mess_log = get_node("/root/Game/MessageLog/MLogText")
+				mess_log.append_bbcode("\n [color=#05431a]Green Army Man[/color] shot you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 				game.damage_player(dmg)
 				me.sprite_node.frame = 1
 				var t = Timer.new()
