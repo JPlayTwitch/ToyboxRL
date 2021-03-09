@@ -61,26 +61,26 @@ class Enemy extends Reference:
 		if hp == 0:
 			dead = true
 	
-	func act(game):
-		if sprite_node.visible:
-			var self_point = game.enemy_pathfinding.get_closest_point(Vector3(tile.x,tile.y,0))
-			var player_point = game.enemy_pathfinding.get_closest_point(Vector3(game.player_tile.x, game.player_tile.y, 0))
-			var path = game.enemy_pathfinding.get_point_path(self_point, player_point)
-			if path:
-				assert(path.size() > 1)
-				var move_tile = Vector2(path[1].x, path[1].y)
-				
-				if move_tile == game.player_tile:
-					game.damage_player(1)
-				else:
-					var blocked = false
-					for enemy in game.enemies:
-						if enemy.tile == move_tile:
-							blocked = true
-							break
-					
-					if !blocked:
-						tile = move_tile
+#	func act(game):
+#		if sprite_node.visible:
+#			var self_point = game.enemy_pathfinding.get_closest_point(Vector3(tile.x,tile.y,0))
+#			var player_point = game.enemy_pathfinding.get_closest_point(Vector3(game.player_tile.x, game.player_tile.y, 0))
+#			var path = game.enemy_pathfinding.get_point_path(self_point, player_point)
+#			if path:
+#				assert(path.size() > 1)
+#				var move_tile = Vector2(path[1].x, path[1].y)
+#
+#				if move_tile == game.player_tile:
+#					game.damage_player(1)
+#				else:
+#					var blocked = false
+#					for enemy in game.enemies:
+#						if enemy.tile == move_tile:
+#							blocked = true
+#							break
+#
+#					if !blocked:
+#						tile = move_tile
 
 # Tileset
 enum Tile {Wall,Floor1,Floor2,Ladder,Stone,Amulet}
@@ -120,62 +120,7 @@ func _ready():
 	randomize()
 	build_level()
 
-func _input(event):
-	if !event.is_pressed():
-		return
-	
-	if event.is_action("Left"):
-		try_move(-1,0)
-	elif event.is_action("UpLeft"):
-		try_move(-1,-1)
-	elif event.is_action("Up"):
-		try_move(0,-1)
-	elif event.is_action("UpRight"):
-		try_move(1,-1)
-	elif event.is_action("Right"):
-		try_move(1,0)
-	elif event.is_action("DownRight"):
-		try_move(1,1)
-	elif event.is_action("Down"):
-		try_move(0,1)
-	elif event.is_action("DownLeft"):
-		try_move(-1,1)
 
-func try_move(dx,dy):
-	
-	# Square we want to move to
-	var x = player_tile.x + dx
-	var y = player_tile.y + dy
-	
-	# If outside map, treat as stone
-	var tile_type = tile_stone
-	
-	if x > 0 && x < level_size.x && y > 0 && y < level_size.y:
-		tile_type = map[x][y]
-	
-	match tile_type:
-		tile_floor:
-			var blocked = false
-			for enemy in enemies:
-				if enemy.tile.x == x && enemy.tile.y == y:
-					enemy.take_damage(self,1)
-					if enemy.dead:
-						enemy.remove()
-						enemies.erase(enemy)
-					blocked = true
-					break
-			if !blocked:
-				player_tile = Vector2(x,y)
-			for enemy in enemies:
-				enemy.act(self)
-		tile_ladder:
-			level_num += 1
-			build_level()
-		tile_amulet:
-			$HUD/EndScreen/Label.text = "You Win"
-			$HUD/EndScreen.visible = true
-	
-	call_deferred("update_visuals")
 
 
 
