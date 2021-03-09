@@ -18,9 +18,8 @@ const MIN_ROOM_DIMENSION = 6
 const MAX_ROOM_DIMENSION = 12
 
 # Player Attributes
-var player_hp_max = 10000
-var player_hp = player_hp_max
-var player_str = 10
+const PlayerScn = preload("res://Player.tscn")
+var Player = PlayerScn.instance()
 
 
 
@@ -131,8 +130,8 @@ func _ready():
 
 
 func damage_player(dmg):
-	player_hp = max(0, player_hp - dmg)
-	if player_hp == 0:
+	Player.hp = max(0, Player.hp - dmg)
+	if Player.hp == 0:
 		$HUD/EndScreen/Label.text = "You Lose"
 		$HUD/EndScreen.visible = true
 
@@ -294,7 +293,7 @@ func update_visuals():
 			enemy.sprite_node.visible = false
 	
 	
-	$HUD/HP.text = "HP: " + str(player_hp) + "/" + str(player_hp_max)
+	$HUD/HP.text = "HP: " + str(Player.hp) + "/" + str(Player.max_hp)
 
 func tile_to_pixel_center(x,y):
 	return Vector2((x + 0.5) * TILE_SIZE, (y + 0.5) * TILE_SIZE)
@@ -518,4 +517,4 @@ func _on_Button_pressed():
 	level_num = 0
 	build_level()
 	$HUD/EndScreen.visible = false
-	player_hp = player_hp_max
+	Player.hp = Player.max_hp

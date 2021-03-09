@@ -1,5 +1,9 @@
 extends Sprite
+#class_name Player
 
+var max_hp = 1000
+var strength = 2
+var hp = max_hp
 
 func _input(event):
 	if !event.is_pressed():
@@ -43,7 +47,8 @@ func try_move(dx,dy):
 			var blocked = false
 			for enemy in game.enemies:
 				if enemy.tile.x == x && enemy.tile.y == y:
-					enemy.take_damage(self,1)
+					var dmg = max(1,strength + randi() % 4 + 1)
+					enemy.take_damage(self,dmg)
 					if enemy.dead:
 						enemy.remove()
 						game.enemies.erase(enemy)

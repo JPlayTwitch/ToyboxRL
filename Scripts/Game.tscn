@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Visibility/Visibility_Undiscovered.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Visibility/Visibility_Visible.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Visibility/Visibility_Fog.png" type="Texture" id=10]
@@ -65,25 +64,13 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="Player" type="Sprite" parent="."]
-position = Vector2( 384, 320 )
-texture = ExtResource( 4 )
-centered = false
-script = ExtResource( 3 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 32, 32 )
-current = true
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
+[node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 margin_right = 96.0
-margin_bottom = 64.0
+margin_bottom = 128.0
 color = Color( 0, 0, 0, 0.560784 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -104,6 +91,28 @@ margin_top = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
 text = "HP:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Str" type="Label" parent="HUD"]
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+text = "STR:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Str2" type="Label" parent="HUD"]
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+text = "Wpn: 1d4"
 align = 1
 valign = 1
 __meta__ = {
