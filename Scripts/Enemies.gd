@@ -38,7 +38,7 @@ class Enemy extends Node:
 		
 		hp = max(0, hp-dmg)
 		sprite_node.get_node("HPBar").rect_size.x = game.TILE_SIZE * hp / max_hp
-#		MLogText.append_bbcode("\n Go Get 'Em Slugger")
+
 #		match type:
 #			EnemyTypes.Teddy:
 #				MLogText.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#ff0000]" + str(dmg) + "[/color] damage")

@@ -10,6 +10,8 @@ export(int) var weighting = 3
 export(int) var vision = 10
 export(int) var evasion = 5
 export(int) var attack_range = 5
+var dead = false
+onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 
 func act(game,me):
 	if self.visible:
@@ -62,7 +64,6 @@ func act(game,me):
 			
 			if !occlusion || (occlusion.position - test_point).length() < 0.1:
 				var dmg = randi() % attack_dice + strength
-				var mess_log = get_node("/root/Game/MessageLog/MLogText")
 				mess_log.append_bbcode("\n [color=#05431a]Green Army Man[/color] shot you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 				game.damage_player(dmg)
 				me.sprite_node.frame = 1
@@ -74,3 +75,13 @@ func act(game,me):
 				yield(t, "timeout")
 				t.queue_free()
 				me.sprite_node.frame = 0
+
+func take_damage(game,dmg):
+	
+	hp = max(0, hp-dmg)
+	get_node("HPBar").rect_size.x = game.TILE_SIZE * hp / max_hp
+	mess_log.append_bbcode("\n You hit [color=#05431a]Green Army Man[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
+	
+	if hp == 0:
+		mess_log.append_bbcode("\n [color=#05431a]Green Army Man[/color] died")
+		dead = true

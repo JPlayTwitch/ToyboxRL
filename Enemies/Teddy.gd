@@ -9,6 +9,8 @@ export(int) var strength = 2
 export(int) var weighting = 2
 export(int) var vision = 10
 export(int) var evasion = 5
+var dead = false
+onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 
 
 func act(game,me):
@@ -21,7 +23,6 @@ func act(game,me):
 			var move_tile = Vector2(path[1].x, path[1].y)
 			if move_tile == game.player_tile:
 				var dmg = randi() % attack_dice + strength
-				var mess_log = get_node("/root/Game/MessageLog/MLogText")
 				mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 				game.damage_player(dmg)
 				me.sprite_node.frame = 1
@@ -41,3 +42,13 @@ func act(game,me):
 						break
 				if !blocked:
 					me.tile = move_tile
+
+func take_damage(game,dmg):
+	
+	hp = max(0, hp-dmg)
+	mess_log.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
+	
+	if hp == 0:
+		mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] died")
+	if hp == 0:
+		dead = true

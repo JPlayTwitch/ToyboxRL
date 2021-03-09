@@ -24,6 +24,10 @@ config/name="ToyboxRL"
 run/main_scene="res://Scripts/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+MessageLog="*res://UI/MessageLog.tscn"
+
 [display]
 
 window/size/width=1280
