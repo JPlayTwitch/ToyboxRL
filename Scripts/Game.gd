@@ -27,59 +27,11 @@ var Player = PlayerScn.instance()
 
 #Enemies
 const LEVEL_ENEMY_COUNTS = [9,15,21,27,30]
-const EnemyTeddy = preload("res://Enemies/Teddy.tscn")
-const EnemySoldier = preload("res://Enemies/Soldier.tscn")
+var Enemies = preload("res://Scripts/Enemies.gd")
 
-class Enemy extends Reference:
-	var sprite_node
-	var tile
-	var full_hp
-	var hp
-	var dead = false
-	
-	func _init(game,enemy_level,x,y):
-		sprite_node = EnemyTeddy.instance()
-#		full_hp = sprite_node.$Teddy/Stats
-		full_hp = 3
-		hp = full_hp
-		tile = Vector2(x,y)
-		sprite_node.position = tile * TILE_SIZE
-		sprite_node.get_node("HPBar").rect_size.x = 0
-		game.add_child(sprite_node)
-	
-	func remove():
-		sprite_node.queue_free()
-	
-	func take_damage(game,dmg):
-		if dead:
-			return
-		
-		hp = max(0, hp-dmg)
-		sprite_node.get_node("HPBar").rect_size.x = TILE_SIZE * hp / full_hp
-		
-		if hp == 0:
-			dead = true
-	
-#	func act(game):
-#		if sprite_node.visible:
-#			var self_point = game.enemy_pathfinding.get_closest_point(Vector3(tile.x,tile.y,0))
-#			var player_point = game.enemy_pathfinding.get_closest_point(Vector3(game.player_tile.x, game.player_tile.y, 0))
-#			var path = game.enemy_pathfinding.get_point_path(self_point, player_point)
-#			if path:
-#				assert(path.size() > 1)
-#				var move_tile = Vector2(path[1].x, path[1].y)
-#
-#				if move_tile == game.player_tile:
-#					game.damage_player(1)
-#				else:
-#					var blocked = false
-#					for enemy in game.enemies:
-#						if enemy.tile == move_tile:
-#							blocked = true
-#							break
-#
-#					if !blocked:
-#						tile = move_tile
+
+
+
 
 # Tileset
 enum Tile {Wall,Floor1,Floor2,Ladder,Stone,Amulet}
@@ -202,7 +154,7 @@ func build_level():
 				break
 		
 		if !blocked:
-			var enemy = Enemy.new(self,0,x,y)
+			var enemy = Enemies.Enemy.new(self,0,x,y)
 			enemies.append(enemy)
 	
 	$HUD/Level.text = "Level: " + str(level_num+1)

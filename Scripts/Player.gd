@@ -48,7 +48,7 @@ func try_move(dx,dy):
 			for enemy in game.enemies:
 				if enemy.tile.x == x && enemy.tile.y == y:
 					var dmg = max(1,strength + randi() % 4 + 1)
-					enemy.take_damage(self,dmg)
+					enemy.take_damage(game,dmg)
 					if enemy.dead:
 						enemy.remove()
 						game.enemies.erase(enemy)
