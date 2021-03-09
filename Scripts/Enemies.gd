@@ -8,15 +8,20 @@ const EnemySoldier = preload("res://Enemies/Soldier.tscn")
 class Enemy extends Reference:
 	var sprite_node
 	var tile
-	var full_hp
+	var max_hp
 	var hp
 	var dead = false
 	
-	func _init(game,enemy_level,x,y):
-		sprite_node = EnemyTeddy.instance()
-#		full_hp = sprite_node.$Teddy/Stats
-		full_hp = 20
-		hp = full_hp
+	func _init(game,enemy_type,x,y):
+		match enemy_type:
+			EnemyTypes.Teddy:
+				sprite_node = EnemyTeddy.instance()
+			EnemyTypes.Soldier:
+				sprite_node = EnemyTeddy.instance()
+			_:
+				sprite_node = EnemyTeddy.instance()
+		max_hp = sprite_node.max_hp
+		hp = max_hp
 		tile = Vector2(x,y)
 		sprite_node.position = tile * game.TILE_SIZE
 		sprite_node.get_node("HPBar").rect_size.x = 0
@@ -30,7 +35,7 @@ class Enemy extends Reference:
 			return
 		
 		hp = max(0, hp-dmg)
-		sprite_node.get_node("HPBar").rect_size.x = game.TILE_SIZE * hp / full_hp
+		sprite_node.get_node("HPBar").rect_size.x = game.TILE_SIZE * hp / max_hp
 		
 		if hp == 0:
 			dead = true
