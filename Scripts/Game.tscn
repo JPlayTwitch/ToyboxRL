@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Visibility/Visibility_Undiscovered.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Visibility/Visibility_Visible.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Visibility/Visibility_Fog.png" type="Texture" id=10]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Visibility_Undiscovered.png 0"
+0/texture = ExtResource( 8 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "Visibility_Fog.png 1"
+1/texture = ExtResource( 10 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "Visibility_Visible.png 2"
+2/texture = ExtResource( 9 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="VisibilityMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Player" type="Sprite" parent="."]
+position = Vector2( 384, 320 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 32, 32 )
+current = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+margin_right = 96.0
+margin_bottom = 64.0
+color = Color( 0, 0, 0, 0.560784 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="HUD"]
+margin_right = 96.0
+margin_bottom = 32.0
+text = "Level:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP" type="Label" parent="HUD"]
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
+text = "HP:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndScreen" type="ColorRect" parent="HUD"]
+visible = false
+margin_right = 1280.0
+margin_bottom = 736.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/EndScreen"]
+margin_top = 256.0
+margin_right = 1280.0
+margin_bottom = 480.0
+text = "You Win"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="HUD/EndScreen"]
+margin_left = 608.0
+margin_top = 416.0
+margin_right = 672.0
+margin_bottom = 448.0
+text = "Reset"
+[connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]
