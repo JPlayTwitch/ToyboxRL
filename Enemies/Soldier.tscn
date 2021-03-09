@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Sprites/Enemies/Soldier.png" type="Texture" id=1]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Soldier.gd" type="Script" id=3]
 
 [node name="Soldier" type="Sprite"]
@@ -19,8 +18,3 @@ color = Color( 0.290196, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Stats" parent="." instance=ExtResource( 2 )]
-max_hp = 13
-dmg = 5
-weighting = 2
