@@ -20,6 +20,15 @@ func act(game,me):
 			var move_tile = Vector2(path[1].x, path[1].y)
 			if move_tile == game.player_tile:
 				game.damage_player(dmg)
+				me.sprite_node.frame = 1
+				var t = Timer.new()
+				t.set_wait_time(0.2)
+				t.set_one_shot(true)
+				self.add_child(t)
+				t.start()
+				yield(t, "timeout")
+				t.queue_free()
+				me.sprite_node.frame = 0
 			else:
 				var blocked = false
 				for enemy in game.enemies:

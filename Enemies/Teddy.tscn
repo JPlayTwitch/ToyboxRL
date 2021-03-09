@@ -4,10 +4,10 @@
 [ext_resource path="res://Enemies/Teddy.gd" type="Script" id=2]
 
 [node name="Teddy" type="Sprite"]
-visible = false
 position = Vector2( 96, 512 )
 texture = ExtResource( 1 )
 centered = false
+hframes = 2
 script = ExtResource( 2 )
 
 [node name="HPBar" type="ColorRect" parent="."]
