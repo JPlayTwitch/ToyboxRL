@@ -5,14 +5,16 @@ enum EnemyTypes {Teddy,Soldier}
 const EnemyTeddy = preload("res://Enemies/Teddy.tscn")
 const EnemySoldier = preload("res://Enemies/Soldier.tscn")
 
-class Enemy extends Reference:
+class Enemy extends Node:
 	var sprite_node
 	var tile
 	var max_hp
 	var hp
 	var dead = false
+	var type
 	
 	func _init(game,enemy_type,x,y):
+		type = enemy_type
 		match enemy_type:
 			EnemyTypes.Teddy:
 				sprite_node = EnemyTeddy.instance()
@@ -36,6 +38,10 @@ class Enemy extends Reference:
 		
 		hp = max(0, hp-dmg)
 		sprite_node.get_node("HPBar").rect_size.x = game.TILE_SIZE * hp / max_hp
+#		MLogText.append_bbcode("\n Go Get 'Em Slugger")
+#		match type:
+#			EnemyTypes.Teddy:
+#				MLogText.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#ff0000]" + str(dmg) + "[/color] damage")
 		
 		if hp == 0:
 			dead = true

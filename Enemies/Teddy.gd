@@ -4,7 +4,8 @@ extends Sprite
 
 export(int) var max_hp = 20
 onready var hp = max_hp
-export(int) var dmg = 3
+export(int) var attack_dice = 3
+export(int) var strength = 2
 export(int) var weighting = 2
 export(int) var vision = 10
 export(int) var evasion = 5
@@ -19,6 +20,9 @@ func act(game,me):
 			assert(path.size() > 1)
 			var move_tile = Vector2(path[1].x, path[1].y)
 			if move_tile == game.player_tile:
+				var dmg = randi() % attack_dice + strength
+				var mess_log = get_node("/root/Game/MessageLog/MLogText")
+				mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 				game.damage_player(dmg)
 				me.sprite_node.frame = 1
 				var t = Timer.new()
