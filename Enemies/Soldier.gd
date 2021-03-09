@@ -47,14 +47,26 @@ func act(game,me):
 					attacking = true
 			else:
 				attacking = true
-#
-#				game.damage_player(dmg)
-#				me.sprite_node.frame = 1
-#				var t = Timer.new()
-#				t.set_wait_time(0.2)
-#				t.set_one_shot(true)
-#				self.add_child(t)
-#				t.start()
-#				yield(t, "timeout")
-#				t.queue_free()
-#				me.sprite_node.frame = 0
+		
+		if attacking:
+			
+			# check if there is anything in the way
+			var space_state = get_world_2d().direct_space_state
+			var player_center = game.tile_to_pixel_center(game.player_tile.x, game.player_tile.y)
+			var x_dir = 1 if game.player_tile.x < me.tile.x else -1
+			var y_dir = 1 if game.player_tile.y < me.tile.y else -1
+			var test_point = game.tile_to_pixel_center(me.tile.x,me.tile.y) + Vector2(x_dir, y_dir) * game.TILE_SIZE / 2
+#			var test_point = game.tile_to_pixel_center(game.player.tile.x,game.player.tile.y)
+			var occlusion = space_state.intersect_ray(player_center, test_point, [self], 0b1)
+			
+			if !occlusion || (occlusion.position - test_point).length() < 0.1:
+				game.damage_player(dmg)
+				me.sprite_node.frame = 1
+				var t = Timer.new()
+				t.set_wait_time(0.2)
+				t.set_one_shot(true)
+				self.add_child(t)
+				t.start()
+				yield(t, "timeout")
+				t.queue_free()
+				me.sprite_node.frame = 0
