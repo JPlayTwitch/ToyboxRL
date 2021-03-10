@@ -9,20 +9,18 @@ const BeanScene = preload("res://Items/Bean.tscn")
 
 
 class Bean extends Node:
-	var tasted = false
-	var name_untasted
-	var name_tasted
 	var flavour
 	var tile
 	var sprite_node
+	var effect
 	
 	func _init(game,x,y,type):
 		tile = Vector2(x, y)
 		sprite_node = BeanScene.instance()
-		print(BeanCatalogue.bean_brawn_flavour)
-		sprite_node.frame = BeanCatalogue.bean_brawn_flavour
+		sprite_node.frame = BeanCatalogue.bean_flavour[type]
 		sprite_node.position = tile*game.TILE_SIZE
+		effect = type
 		game.add_child(sprite_node)
 	
-	func _remove():
+	func remove():
 		sprite_node.queue_free()

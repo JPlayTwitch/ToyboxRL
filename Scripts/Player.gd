@@ -4,6 +4,8 @@ var max_hp = 1000
 var strength = 2
 var hp = max_hp
 
+onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+
 signal turn_advance
 
 func _input(event):
@@ -58,6 +60,7 @@ func try_move(dx,dy):
 					break
 			if !blocked:
 				game.player_tile = Vector2(x,y)
+				pickup_items()
 			emit_signal("turn_advance")
 		game.tile_ladder:
 			game.level_num += 1
@@ -66,4 +69,20 @@ func try_move(dx,dy):
 			$HUD/EndScreen/Label.text = "You Win"
 			$HUD/EndScreen.visible = true
 	
+	
 	game.update_visuals()
+
+func pickup_items():
+	var game = get_node("/root/Game")
+	var remove_queue = []
+	for bean in game.beans:
+		if bean.tile == game.player_tile:
+			if BeanCatalogue.tasted[bean.effect]:
+				mess_log.append_bbcode("\n Picked up "+BeanCatalogue.bean_name_tasted[bean.effect])
+			else:
+				mess_log.append_bbcode("\n Picked up "+BeanCatalogue.bean_name_untasted[bean.effect])
+			remove_queue.append(bean)
+			bean.remove()
+	
+	for bean in remove_queue:
+		game.beans.erase(bean)

@@ -143,14 +143,14 @@ func build_level():
 	else:
 		set_tile(ladder_x,ladder_y,tile_amulet)
 	
-	var bean_counter = 5
+	var bean_counter = 7
 	while bean_counter > 0:
 		var room = rooms[randi() % (rooms.size())]
 		var x = room.position.x + 1 + randi() % int(room.size.x-2)
 		var y = room.position.y + 1 + randi() % int(room.size.x-2)
 		if map[x][y] == tile_floor:
 			print("Floor")
-			beans.append(Beans.Bean.new(self,x,y,0))
+			beans.append(Beans.Bean.new(self,x,y,randi() % BeanCatalogue.Effects.size()))
 			bean_counter -= 1
 		
 	
