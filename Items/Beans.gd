@@ -1,50 +1,28 @@
 extends Sprite
 
-enum BeanEffects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS}
-enum Flavours {LICORICE, TANGERINE, STRAWBERRY, APPLE, BLUEBERRY, CAPPUCINO, WATERMELON, BUTTERSCOTCH, \
-	BUBBLEGUM, COCONUT, MINT, GRAPE}
+const BeanScene = preload("res://Items/Bean.tscn")
+#const Catalogue = preload("res://Items/Bean_Catalogue.gd")
+#onready var Catalogue = get_node("res://BeanCatalogue")
+#onready var Catalogue = get_node("/root/BeanCatalogue")
 
-var flavour_text = ["Licorice", "Tangerine", "Strawberry", "Apple", "Blueberry", "Cappucino", "Watermelon", "Butterscotch", \
-	"Bubblegum", "Coconut", "Mint", "Grape"]
+#const bean_brawn_flavour = Catalogue.bean_brawn_flavour
 
-var bean_colour = ["#464644", "#e68500", "#d80535", "#159341", "#0058a5", "#64371e", "#00562d", "#ddb889", \
-	"#ecc4fa", "#cdddf7", "#a1d9f8", "#653494"]
 
-class Bean extends Reference:
+class Bean extends Node:
 	var tasted = false
 	var name_untasted
 	var name_tasted
 	var flavour
-
-
-
-
-func _init():
+	var tile
+	var sprite_node
 	
-	#For testing purposes only
-	randomize()
+	func _init(game,x,y,type):
+		tile = Vector2(x, y)
+		sprite_node = BeanScene.instance()
+		print(BeanCatalogue.bean_brawn_flavour)
+		sprite_node.frame = BeanCatalogue.bean_brawn_flavour
+		sprite_node.position = tile*game.TILE_SIZE
+		game.add_child(sprite_node)
 	
-	# set up the list for flavour selection
-	var flavour_list = range(Flavours.size())
-
-	# create a bean - brawn
-	var Bean_Brawn = Bean.new()
-	var flavour = randi() % flavour_list.size()
-	Bean_Brawn.flavour = flavour
-	flavour_list.remove(flavour)
-	Bean_Brawn.name_tasted = "[color="+bean_colour[flavour]+"]"+flavour_text[flavour]+" Jelly Bean of Brawn[/color]"
-	Bean_Brawn.name_untasted = "[color="+bean_colour[flavour]+"]Mysterious "+flavour_text[flavour]+" Jelly Bean[/color]"
-	print(Bean_Brawn.name_tasted)
-	print(Bean_Brawn.name_untasted)
-
-
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	func _remove():
+		sprite_node.queue_free()

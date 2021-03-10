@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 MessageLog="*res://UI/MessageLog.tscn"
+BeanCatalogue="*res://Items/Bean_Catalogue.gd"
 
 [display]
 

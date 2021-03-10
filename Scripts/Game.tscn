@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/MessageLog.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Items/Bean_Catalogue.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/Visibility/Visibility_Undiscovered.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Visibility/Visibility_Visible.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Visibility/Visibility_Fog.png" type="Texture" id=10]
@@ -59,6 +60,7 @@ script = ExtResource( 1 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
+script = ExtResource( 5 )
 
 [node name="VisibilityMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

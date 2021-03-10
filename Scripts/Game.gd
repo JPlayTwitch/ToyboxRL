@@ -29,7 +29,8 @@ var Player = PlayerScn.instance()
 const LEVEL_ENEMY_PTS = [19,45,81,97,130]
 var Enemies = preload("res://Scripts/Enemies.gd")
 
-
+var Beans = preload("res://Items/Beans.gd")
+#var Catalogue = preload("res://Items/Bean_Catalogue.gd")
 
 
 
@@ -43,6 +44,7 @@ var map = []
 var rooms = []
 var level_size
 var enemies = []
+var beans = []
 
 # Node Refs
 onready var tile_map = $TileMap
@@ -69,6 +71,7 @@ var enemy_pathfinding
 func _ready():
 	OS.set_window_size(Vector2(WINDOW_WIDTH,WINDOW_HEIGHT))
 	randomize()
+	BeanCatalogue.assign_beans()
 	build_level()
 
 
@@ -139,6 +142,17 @@ func build_level():
 		set_tile(ladder_x,ladder_y,tile_ladder)
 	else:
 		set_tile(ladder_x,ladder_y,tile_amulet)
+	
+	var bean_counter = 5
+	while bean_counter > 0:
+		var room = rooms[randi() % (rooms.size())]
+		var x = room.position.x + 1 + randi() % int(room.size.x-2)
+		var y = room.position.y + 1 + randi() % int(room.size.x-2)
+		if map[x][y] == tile_floor:
+			print("Floor")
+			beans.append(Beans.Bean.new(self,x,y,0))
+			bean_counter -= 1
+		
 	
 	# Place Enemies
 	var num_enemies = LEVEL_ENEMY_PTS[level_num]
@@ -235,6 +249,11 @@ func update_visuals():
 			enemy.sprite_node.visible = true
 		else:
 			enemy.sprite_node.visible = false
+	
+	for bean in beans:
+		if !bean.sprite_node.visible:
+			if visibility_map.get_cell(bean.tile.x,bean.tile.y) == Visibility.Visible:
+				bean.sprite_node.visible = true
 	
 	
 	$HUD/HP.text = "HP: " + str(Player.hp) + "/" + str(Player.max_hp)
