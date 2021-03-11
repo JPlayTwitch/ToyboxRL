@@ -83,6 +83,8 @@ func pickup_items():
 				mess_log.append_bbcode("\n Picked up "+BeanCatalogue.bean_name_untasted[bean.effect])
 			remove_queue.append(bean)
 			bean.remove()
+			InvDict.additem(bean.effect)
+			print(InvDict.inventory)
 	
 	for bean in remove_queue:
 		game.beans.erase(bean)

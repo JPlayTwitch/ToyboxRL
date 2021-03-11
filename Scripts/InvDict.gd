@@ -1,4 +1,4 @@
-extends Reference
+extends Node
 
 
 var inventory = {}
@@ -8,13 +8,13 @@ func _ready():
 	pass # Replace with function body.
 
 
-func add(key):
+func additem(key):
 	if inventory.has(key):
 		inventory[key] += 1
 	else:
-		inventory.key = 1
+		inventory[key] = 1
 	
-func remove(key):
+func removeitem(key):
 	if inventory.has(key):
 		inventory[key] -= 1
 		if inventory[key] < 1:
