@@ -16,6 +16,7 @@ var bean_flavour = []
 var bean_name_tasted = []
 var bean_name_untasted = []
 var tasted = []
+var effect = []
 
 func assign_beans():
 	
@@ -25,6 +26,7 @@ func assign_beans():
 	bean_name_tasted.resize(Effects.size())
 	bean_name_untasted.resize(Effects.size())
 	tasted.resize(Effects.size())
+	effect.resize(Effects.size())
 
 	# create the bean types
 	for i in range(Effects.size()):
@@ -34,3 +36,4 @@ func assign_beans():
 		bean_name_untasted[i] = "[color="+bean_colour[flavour]+"]Mysterious "+flavour_text[flavour]+" Jelly Bean[/color]"
 		bean_name_tasted[i] = "[color="+bean_colour[flavour]+"]"+flavour_text[flavour]+" Jelly Bean of "+effects_text[i]+"[/color]"
 		tasted[i] = true
+		effect[i] = effects_text[i]

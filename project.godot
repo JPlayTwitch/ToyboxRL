@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 MessageLog="*res://UI/MessageLog.tscn"
 BeanCatalogue="*res://Items/Bean_Catalogue.gd"
+InvDict="*res://Scripts/InvDict.gd"
 
 [display]
 
