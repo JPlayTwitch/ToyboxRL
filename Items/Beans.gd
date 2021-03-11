@@ -1,11 +1,6 @@
 extends Sprite
 
 const BeanScene = preload("res://Items/Bean.tscn")
-#const Catalogue = preload("res://Items/Bean_Catalogue.gd")
-#onready var Catalogue = get_node("res://BeanCatalogue")
-#onready var Catalogue = get_node("/root/BeanCatalogue")
-
-#const bean_brawn_flavour = Catalogue.bean_brawn_flavour
 
 
 class Bean extends Node:

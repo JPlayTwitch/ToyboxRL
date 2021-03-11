@@ -28,7 +28,7 @@ config/icon="res://icon.png"
 
 MessageLog="*res://UI/MessageLog.tscn"
 BeanCatalogue="*res://Items/Bean_Catalogue.gd"
-InvDict="*res://Scripts/InvDict.gd"
+InvDict="*res://Scripts/InvDict.tscn"
 
 [display]
 
@@ -85,6 +85,11 @@ DownRight={
 Wait={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777355,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
  ]
 }
 

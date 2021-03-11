@@ -1,13 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/MessageLog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Items/Bean_Catalogue.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/InventorySlotText.gd" type="Script" id=6]
+[ext_resource path="res://UI/Inventory.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Visibility/Visibility_Undiscovered.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Visibility/Visibility_Visible.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Visibility/Visibility_Fog.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Items/Beans.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/InvIcon.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Visibility_Undiscovered.png 0"
@@ -150,5 +154,241 @@ margin_bottom = 448.0
 text = "Reset"
 
 [node name="MessageLog" parent="." instance=ExtResource( 4 )]
+
+[node name="Inventory" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Sprite" parent="Inventory"]
+visible = false
+position = Vector2( 544, 416 )
+texture = ExtResource( 7 )
+offset = Vector2( 0, -16 )
+
+[node name="Title" type="Label" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -192.0
+margin_right = 160.0
+margin_bottom = -160.0
+text = "INVENTORY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlotText" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -160.0
+margin_right = 192.0
+margin_bottom = -128.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlotText2" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -128.0
+margin_right = 192.0
+margin_bottom = -96.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 1
+
+[node name="InventorySlotText3" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -96.0
+margin_right = 192.0
+margin_bottom = -64.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 2
+
+[node name="InventorySlotText4" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -64.0
+margin_right = 192.0
+margin_bottom = -32.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 3
+
+[node name="InventorySlotText5" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = -32.0
+margin_right = 192.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 4
+
+[node name="InventorySlotText6" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_right = 192.0
+margin_bottom = 32.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 5
+
+[node name="InventorySlotText7" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = 32.0
+margin_right = 192.0
+margin_bottom = 64.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 6
+
+[node name="InventorySlotText8" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 96.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 7
+
+[node name="InventorySlotText9" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = 96.0
+margin_right = 192.0
+margin_bottom = 128.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 8
+
+[node name="InventorySlotText10" type="RichTextLabel" parent="Inventory/Inventory"]
+margin_left = -160.0
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 160.0
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_slot = 9
+
+[node name="InvIcon" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, -160 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+
+[node name="InvIcon2" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, -128 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 1
+
+[node name="InvIcon3" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, -96 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 2
+
+[node name="InvIcon4" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, -64 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 3
+
+[node name="InvIcon5" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, -32 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 4
+
+[node name="InvIcon6" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, 0 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 5
+
+[node name="InvIcon7" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, 32 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 6
+
+[node name="InvIcon8" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, 64 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 7
+
+[node name="InvIcon9" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, 96 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 8
+
+[node name="InvIcon10" type="Sprite" parent="Inventory/Inventory"]
+position = Vector2( -192, 128 )
+texture = ExtResource( 11 )
+centered = false
+vframes = 3
+hframes = 4
+script = ExtResource( 12 )
+item_slot = 9
 [connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]

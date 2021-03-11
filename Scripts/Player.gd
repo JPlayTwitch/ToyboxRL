@@ -5,6 +5,7 @@ var strength = 2
 var hp = max_hp
 
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 
 signal turn_advance
 
@@ -30,6 +31,8 @@ func _input(event):
 		try_move(-1,1)
 	elif event.is_action("Wait"):
 		emit_signal("turn_advance")
+	elif event.is_action("Inventory"):
+		InvUI.visible = not InvUI.visible
 
 func try_move(dx,dy):
 	
@@ -83,7 +86,7 @@ func pickup_items():
 				mess_log.append_bbcode("\n Picked up "+BeanCatalogue.bean_name_untasted[bean.effect])
 			remove_queue.append(bean)
 			bean.remove()
-			InvDict.additem(bean.effect)
+			InvDict.additem(BeanCatalogue.effects_text[bean.effect])
 			print(InvDict.inventory)
 	
 	for bean in remove_queue:
