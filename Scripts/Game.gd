@@ -25,10 +25,12 @@ var Player = PlayerScn.instance()
 
 
 
-#Enemies
+# Enemies
 const LEVEL_ENEMY_PTS = [19,45,81,97,130]
 var Enemies = preload("res://Scripts/Enemies.gd")
 
+# Beans
+const BEAN_GEN = [5,9,13,20,25]
 var Beans = preload("res://Items/Beans.gd")
 
 
@@ -142,11 +144,11 @@ func build_level():
 	else:
 		set_tile(ladder_x,ladder_y,tile_amulet)
 	
-	var bean_counter = 7
+	var bean_counter = BEAN_GEN[level_num]
 	while bean_counter > 0:
 		var room = rooms[randi() % (rooms.size())]
 		var x = room.position.x + 1 + randi() % int(room.size.x-2)
-		var y = room.position.y + 1 + randi() % int(room.size.x-2)
+		var y = room.position.y + 1 + randi() % int(room.size.y-2)
 		if map[x][y] == tile_floor:
 			beans.append(Beans.Bean.new(self,x,y,randi() % BeanCatalogue.Effects.size()))
 			bean_counter -= 1
@@ -162,7 +164,7 @@ func build_level():
 		var blocked = false
 		for enemy in enemies:
 			if enemy.tile.x == x && enemy.tile.y == y:
-				blocked == true
+				blocked = true
 				break
 		
 		var enemy_type = randi()%2

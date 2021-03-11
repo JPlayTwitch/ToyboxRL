@@ -2,6 +2,9 @@ extends Node
 
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 onready var game = get_node("/root/Game/")
+onready var InvUI = get_node("/root/Game/Inventory/Inventory")
+
+
 
 enum Effects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS}
 enum Flavours {LICORICE, TANGERINE, STRAWBERRY, APPLE, BLUEBERRY, CAPPUCINO, WATERMELON, BUTTERSCOTCH, \
@@ -58,10 +61,13 @@ func use_bean(effect_str):
 			PlayerStats.hp = min(PlayerStats.hp + hp_increase,PlayerStats.max_hp)
 			game.update_visuals()
 		Effects.PERPLEXITY:
-			mess_log.append_bbcode("\n You feel confused. J will program that effect in later though.")
+			mess_log.append_bbcode("\n You feel confused.")
+			PlayerStats.confused += 20
 			game.update_visuals()
 		Effects.PARALYSIS:
-			mess_log.append_bbcode("\n You are frozen in place. J will program that effect in later though.")
+			mess_log.append_bbcode("\n You are frozen in place. Press space to continue.")
+			PlayerStats.paralysed = true
+			InvUI.visible = false
 			game.update_visuals()
 		Effects.HEALING:
 			mess_log.append_bbcode("\n You feel much better.")

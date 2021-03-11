@@ -9,27 +9,45 @@ func _input(event):
 	if !event.is_pressed():
 		return
 	
+	# paralysed mode
+	if PlayerStats.paralysed:
+		if event.is_action("ui_accept"):
+			pass_turns(20)
+			PlayerStats.paralysed = false
+	
+	# non-inventory
 	if !InvUI.visible:
-		if event.is_action("Left"):
-			try_move(-1,0)
-		elif event.is_action("UpLeft"):
-			try_move(-1,-1)
-		elif event.is_action("Up"):
-			try_move(0,-1)
-		elif event.is_action("UpRight"):
-			try_move(1,-1)
-		elif event.is_action("Right"):
-			try_move(1,0)
-		elif event.is_action("DownRight"):
-			try_move(1,1)
-		elif event.is_action("Down"):
-			try_move(0,1)
-		elif event.is_action("DownLeft"):
-			try_move(-1,1)
-		elif event.is_action("Wait"):
-			emit_signal("turn_advance")
-		elif event.is_action("Inventory"):
+		#confused motion
+		if PlayerStats.confused > 0:
+			if event.is_action("Left") || event.is_action("Right") || event.is_action("Up") || event.is_action("Down") \
+				|| event.is_action("UpLeft") || event.is_action("DownLeft") || event.is_action("UpRight") \
+				|| event.is_action("DownRight") || event.is_action("Wait"):
+				try_move(randi() % 3 - 1, randi() % 3 - 1)
+				mess_log.append_bbcode("\n You are confused and wandering aimlessly")
+				PlayerStats.confused -= 1
+		#standard motion
+		else:
+			if event.is_action("Left"):
+				try_move(-1,0)
+			elif event.is_action("UpLeft"):
+				try_move(-1,-1)
+			elif event.is_action("Up"):
+				try_move(0,-1)
+			elif event.is_action("UpRight"):
+				try_move(1,-1)
+			elif event.is_action("Right"):
+				try_move(1,0)
+			elif event.is_action("DownRight"):
+				try_move(1,1)
+			elif event.is_action("Down"):
+				try_move(0,1)
+			elif event.is_action("DownLeft"):
+				try_move(-1,1)
+			elif event.is_action("Wait"):
+				emit_signal("turn_advance")
+		if event.is_action("Inventory"):
 			InvUI.visible = true
+	#inventory
 	else:
 		if event.is_action("ui_cancel"):
 			InvUI.visible = false
@@ -121,3 +139,7 @@ func pickup_items():
 	
 	for bean in remove_queue:
 		game.beans.erase(bean)
+
+func pass_turns(qty):
+	for _i in range(qty):
+		emit_signal("turn_advance")
