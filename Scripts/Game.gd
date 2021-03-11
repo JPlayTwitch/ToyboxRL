@@ -30,7 +30,6 @@ const LEVEL_ENEMY_PTS = [19,45,81,97,130]
 var Enemies = preload("res://Scripts/Enemies.gd")
 
 var Beans = preload("res://Items/Beans.gd")
-#var Catalogue = preload("res://Items/Bean_Catalogue.gd")
 
 
 

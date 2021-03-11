@@ -14,6 +14,7 @@ var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 
 func act(game,me):
+	# if in line of sight
 	if self.visible:
 		var self_point = game.enemy_pathfinding.get_closest_point(Vector3(me.tile.x,me.tile.y,0))
 		var player_point = game.enemy_pathfinding.get_closest_point(Vector3(game.player_tile.x, game.player_tile.y, 0))
@@ -31,7 +32,7 @@ func act(game,me):
 						break
 				if !blocked:
 					me.tile = move_tile
-			# if you are next to the player
+			# if they are next to the player
 			elif move_tile == game.player_tile:
 				# find somewhere to run directly opposite the player
 				var flee_tile = 2*Vector2(me.tile.x,me.tile.y)-Vector2(game.player_tile.x, game.player_tile.y)
@@ -75,6 +76,20 @@ func act(game,me):
 				yield(t, "timeout")
 				t.queue_free()
 				me.sprite_node.frame = 0
+	else:
+		#If you aren't visible, meander about
+		var amble_tile = Vector2(me.tile.x,me.tile.y)+Vector2(randi() % 3 - 1, randi() % 3 -1)
+		# only allow enemy to move if this is an unoccupied floor tile
+		var blocked = false
+		if game.map[amble_tile.x][amble_tile.y] == game.tile_floor:
+			for enemy in game.enemies:
+				if enemy.tile == amble_tile:
+					blocked = true
+					break
+		else:
+			blocked = true
+		if !blocked:
+			me.tile = amble_tile
 
 func take_damage(game,dmg):
 	
