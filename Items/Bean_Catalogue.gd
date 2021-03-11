@@ -1,6 +1,7 @@
 extends Node
 
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+onready var game = get_node("/root/Game/")
 
 enum Effects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS}
 enum Flavours {LICORICE, TANGERINE, STRAWBERRY, APPLE, BLUEBERRY, CAPPUCINO, WATERMELON, BUTTERSCOTCH, \
@@ -49,5 +50,25 @@ func use_bean(effect_str):
 		Effects.BRAWN:
 			mess_log.append_bbcode("\n You feel stronger.")
 			PlayerStats.strength += 1
-	
+			game.update_visuals()
+		Effects.ENDURANCE:
+			mess_log.append_bbcode("\n You feel more resilient.")
+			var hp_increase = int(PlayerStats.max_hp*0.2)
+			PlayerStats.max_hp = PlayerStats.max_hp + hp_increase
+			PlayerStats.hp = min(PlayerStats.hp + hp_increase,PlayerStats.max_hp)
+			game.update_visuals()
+		Effects.PERPLEXITY:
+			mess_log.append_bbcode("\n You feel confused. J will program that effect in later though.")
+			game.update_visuals()
+		Effects.PARALYSIS:
+			mess_log.append_bbcode("\n You are frozen in place. J will program that effect in later though.")
+			game.update_visuals()
+		Effects.HEALING:
+			mess_log.append_bbcode("\n You feel much better.")
+			PlayerStats.hp = min(PlayerStats.hp+int(0.5*PlayerStats.max_hp),PlayerStats.max_hp)
+			game.update_visuals()
+		Effects.LITHENESS:
+			mess_log.append_bbcode("\n You feel positively limber.")
+			PlayerStats.evasion = min(PlayerStats.evasion+5, 90)
+			game.update_visuals()
 	InvDict.removeitem(effect_str)

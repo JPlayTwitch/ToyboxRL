@@ -1,9 +1,5 @@
 extends Sprite
 
-var max_hp = 1000
-var strength = 2
-var hp = max_hp
-
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 

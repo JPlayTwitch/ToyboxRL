@@ -77,7 +77,7 @@ format = 1
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 margin_right = 96.0
-margin_bottom = 128.0
+margin_bottom = 160.0
 color = Color( 0, 0, 0, 0.560784 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,10 +115,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WeaponDmg" type="Label" parent="HUD"]
+[node name="Evasion" type="Label" parent="HUD"]
 margin_top = 96.0
 margin_right = 96.0
 margin_bottom = 128.0
+text = "Evasion:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponDmg" type="Label" parent="HUD"]
+margin_top = 128.0
+margin_right = 96.0
+margin_bottom = 160.0
 text = "Wpn: 1d4"
 align = 1
 valign = 1

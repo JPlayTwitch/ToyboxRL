@@ -257,6 +257,7 @@ func update_visuals():
 	
 	$HUD/HP.text = "HP: " + str(PlayerStats.hp) + "/" + str(PlayerStats.max_hp)
 	$HUD/Strength.text = "STR: " + str(PlayerStats.strength)
+	$HUD/Evasion.text = "Evasion: " + str(PlayerStats.evasion) + "%"
 
 func tile_to_pixel_center(x,y):
 	return Vector2((x + 0.5) * TILE_SIZE, (y + 0.5) * TILE_SIZE)

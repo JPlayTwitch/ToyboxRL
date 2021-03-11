@@ -17,8 +17,8 @@ func on_inventory_changed():
 		var bean_str = InvDict.inventory.keys()[item_slot]
 		var bean_type = BeanCatalogue.effects_text.find(bean_str)
 		if BeanCatalogue.tasted[bean_type]:
-			self.bbcode_text = BeanCatalogue.bean_name_tasted[bean_type]
+			self.bbcode_text = BeanCatalogue.bean_name_tasted[bean_type] + " (x" + str(InvDict.inventory[bean_str]) + ")"
 		else:
-			self.bbcode_text = BeanCatalogue.bean_name_tasted[bean_type]
+			self.bbcode_text = BeanCatalogue.bean_name_untasted[bean_type] + " (x" + str(InvDict.inventory[bean_str]) + ")"
 	else:
 		self.bbcode_text = ""
