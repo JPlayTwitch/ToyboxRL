@@ -8,7 +8,7 @@ export(int) var attack_dice = 3
 export(int) var strength = 2
 export(int) var weighting = 2
 export(int) var vision = 10
-export(int) var evasion = 5
+export(int) var evasion = 10
 var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 
@@ -23,8 +23,12 @@ func act(game,me):
 			var move_tile = Vector2(path[1].x, path[1].y)
 			if move_tile == game.player_tile:
 				var dmg = randi() % attack_dice + strength
-				mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
-				game.damage_player(dmg)
+				var hit = randi() % 100 >= PlayerStats.evasion
+				if hit:
+					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
+					game.damage_player(dmg)
+				else:
+					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] swiped the air fruitlessly")
 				me.sprite_node.frame = 1
 				var t = Timer.new()
 				t.set_wait_time(0.2)
@@ -58,11 +62,14 @@ func act(game,me):
 			me.tile = amble_tile
 
 func take_damage(game,dmg):
-	
-	hp = max(0, hp-dmg)
-	mess_log.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
-	
-	if hp == 0:
-		mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] died")
-	if hp == 0:
-		dead = true
+	var hit = randi() % 100 >= evasion
+	if hit:
+		hp = max(0, hp-dmg)
+		mess_log.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
+		
+		if hp == 0:
+			mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] died")
+		if hp == 0:
+			dead = true#
+	else:
+		mess_log.append_bbcode("\n You missed the [color=#bd9521]Teddy Bear[/color]")
