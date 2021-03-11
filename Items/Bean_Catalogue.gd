@@ -1,5 +1,7 @@
 extends Node
 
+onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+
 enum Effects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS}
 enum Flavours {LICORICE, TANGERINE, STRAWBERRY, APPLE, BLUEBERRY, CAPPUCINO, WATERMELON, BUTTERSCOTCH, \
 	BUBBLEGUM, COCONUT, MINT, GRAPE}
@@ -33,4 +35,19 @@ func assign_beans():
 		flavour_list.remove(flavour)
 		bean_name_untasted[i] = "[color="+bean_colour[flavour]+"]Mysterious "+flavour_text[flavour]+" Jelly Bean[/color]"
 		bean_name_tasted[i] = "[color="+bean_colour[flavour]+"]"+flavour_text[flavour]+" Jelly Bean of "+effects_text[i]+"[/color]"
-		tasted[i] = true
+		tasted[i] = false
+
+func use_bean(effect_str):
+	var effect = effects_text.find(effect_str)
+	
+	if tasted[effect]:
+		mess_log.append_bbcode("\n You ate a "+bean_name_tasted[effect]+".")
+	else:
+		mess_log.append_bbcode("\n You ate a "+bean_name_untasted[effect]+".\n It must have been a "+bean_name_tasted[effect]+".")
+		tasted[effect] = true
+	match effect:
+		Effects.BRAWN:
+			mess_log.append_bbcode("\n You feel stronger.")
+			PlayerStats.strength += 1
+	
+	InvDict.removeitem(effect_str)

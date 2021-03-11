@@ -85,8 +85,8 @@ func _ready():
 
 
 func damage_player(dmg):
-	Player.hp = max(0, Player.hp - dmg)
-	if Player.hp == 0:
+	PlayerStats.hp = max(0, PlayerStats.hp - dmg)
+	if PlayerStats.hp == 0:
 		$HUD/EndScreen/Label.text = "You Lose"
 		$HUD/EndScreen.visible = true
 
@@ -255,7 +255,8 @@ func update_visuals():
 				bean.sprite_node.visible = true
 	
 	
-	$HUD/HP.text = "HP: " + str(Player.hp) + "/" + str(Player.max_hp)
+	$HUD/HP.text = "HP: " + str(PlayerStats.hp) + "/" + str(PlayerStats.max_hp)
+	$HUD/Strength.text = "STR: " + str(PlayerStats.strength)
 
 func tile_to_pixel_center(x,y):
 	return Vector2((x + 0.5) * TILE_SIZE, (y + 0.5) * TILE_SIZE)
@@ -474,7 +475,7 @@ func _on_Button_pressed():
 	level_num = 0
 	build_level()
 	$HUD/EndScreen.visible = false
-	Player.hp = Player.max_hp
+	PlayerStats.hp = PlayerStats.max_hp
 
 
 func _on_Player_turn_advance():

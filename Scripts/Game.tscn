@@ -104,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Str" type="Label" parent="HUD"]
+[node name="Strength" type="Label" parent="HUD"]
 margin_top = 64.0
 margin_right = 96.0
 margin_bottom = 96.0
@@ -115,7 +115,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Str2" type="Label" parent="HUD"]
+[node name="WeaponDmg" type="Label" parent="HUD"]
 margin_top = 96.0
 margin_right = 96.0
 margin_bottom = 128.0
@@ -303,6 +303,7 @@ __meta__ = {
 item_slot = 9
 
 [node name="InvIcon" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, -160 )
 texture = ExtResource( 11 )
 centered = false
@@ -311,6 +312,7 @@ hframes = 4
 script = ExtResource( 12 )
 
 [node name="InvIcon2" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, -128 )
 texture = ExtResource( 11 )
 centered = false
@@ -320,6 +322,7 @@ script = ExtResource( 12 )
 item_slot = 1
 
 [node name="InvIcon3" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, -96 )
 texture = ExtResource( 11 )
 centered = false
@@ -329,6 +332,7 @@ script = ExtResource( 12 )
 item_slot = 2
 
 [node name="InvIcon4" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, -64 )
 texture = ExtResource( 11 )
 centered = false
@@ -338,6 +342,7 @@ script = ExtResource( 12 )
 item_slot = 3
 
 [node name="InvIcon5" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, -32 )
 texture = ExtResource( 11 )
 centered = false
@@ -347,6 +352,7 @@ script = ExtResource( 12 )
 item_slot = 4
 
 [node name="InvIcon6" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, 0 )
 texture = ExtResource( 11 )
 centered = false
@@ -356,6 +362,7 @@ script = ExtResource( 12 )
 item_slot = 5
 
 [node name="InvIcon7" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, 32 )
 texture = ExtResource( 11 )
 centered = false
@@ -365,6 +372,7 @@ script = ExtResource( 12 )
 item_slot = 6
 
 [node name="InvIcon8" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, 64 )
 texture = ExtResource( 11 )
 centered = false
@@ -374,6 +382,7 @@ script = ExtResource( 12 )
 item_slot = 7
 
 [node name="InvIcon9" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, 96 )
 texture = ExtResource( 11 )
 centered = false
@@ -383,6 +392,7 @@ script = ExtResource( 12 )
 item_slot = 8
 
 [node name="InvIcon10" type="Sprite" parent="Inventory/Inventory"]
+visible = false
 position = Vector2( -192, 128 )
 texture = ExtResource( 11 )
 centered = false
