@@ -103,6 +103,9 @@ func build_level():
 	for enemy in enemies:
 		enemy.remove()
 	enemies.clear()
+	for bean in beans:
+		bean.remove()
+	beans.clear()
 	
 	enemy_pathfinding = AStar.new()
 	
