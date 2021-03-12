@@ -1,7 +1,7 @@
 extends Node2D
 
 #TESTING ONLY
-var visibility_disabled = true
+var visibility_disabled = false
 
 # Display
 const WINDOW_WIDTH = 1280
@@ -128,7 +128,7 @@ func build_level():
 			map[x].append(tile_stone)
 			tile_map.set_cell(x,y,tile_stone)
 			visibility_map.set_cell(x,y,Visibility.Undiscovered)
-			floor_type[x].append([FloorType.Std])
+			floor_type[x].append(FloorType.Std)
 	
 	# Make Rooms
 	var free_regions = [Rect2(Vector2(2,2), level_size - Vector2(4,4))]
@@ -463,13 +463,33 @@ func add_room(free_regions):
 	if region.size.y > size_y:
 		start_y += randi() % int(region.size.y - size_y)
 	
+	var force_square = randi() % 20
+	if force_square <6:
+		if size_x > 10 && size_y > 10:
+			size_x = 10
+			size_y = 10
+#		size_x = min(size_x, 10)
+#		size_y = min(10, size_y)
 	
 	# Add Room to List
 	var room = Rect2(start_x,start_y,size_x,size_y)
 	rooms.append(room)
 	var room_type
+	# Chess room
 	if size_x == 10 && size_y == 10:
 		room_type = FloorType.Chess
+		var enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.Knight,start_x+2,start_y+2)
+		enemies.append(enemy)
+		enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.Knight,start_x+2,start_y+7)
+		enemies.append(enemy)
+		enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.Knight,start_x+7,start_y+2)
+		enemies.append(enemy)
+		enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.Knight,start_x+7,start_y+7)
+		enemies.append(enemy)
+		beans.append(Beans.Bean.new(self,start_x+4,start_y+4,randi() % BeanCatalogue.Effects.size()))
+		beans.append(Beans.Bean.new(self,start_x+4,start_y+5,randi() % BeanCatalogue.Effects.size()))
+		beans.append(Beans.Bean.new(self,start_x+5,start_y+4,randi() % BeanCatalogue.Effects.size()))
+		beans.append(Beans.Bean.new(self,start_x+5,start_y+5,randi() % BeanCatalogue.Effects.size()))
 	else:
 		room_type = FloorType.Std
 	
@@ -486,11 +506,8 @@ func add_room(free_regions):
 		
 		for x in range(start_x + 1, start_x + size_x - 1):
 			set_tile(x,y,tile_floor,room_type)
-#			tile_map[x][y].set_frame(1)
-#			if ((x + y) % 2) == 1:
-#				set_tile(x,y,Tile.Floor1)
-#			else:
-#				set_tile(x,y,Tile.Floor2)
+			if room_type == FloorType.Chess:
+				floor_type[x][y] = FloorType.Chess
 	
 	# Remove the room from the region
 	cut_regions(free_regions,room)
@@ -527,10 +544,10 @@ func cut_regions(free_regions,region_to_remove):
 	for region in addition_queue:
 		free_regions.append(region)
 
-func set_tile(x, y, type,floor_type):
+func set_tile(x, y, type,floor_sprite):
 	map[x][y] = type
 	if type == tile_floor:
-		if floor_type == FloorType.Chess:
+		if floor_sprite == FloorType.Chess:
 			if int(x + y) % 2 == 1:
 				tile_map.set_cell(x,y,tile_chess,false,false,false,Vector2(1,0))
 			else:
