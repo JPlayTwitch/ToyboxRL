@@ -73,6 +73,8 @@ func act(game,me):
 			assert(path.size() > 1)
 			for i in range(min(path.size()-1,3)):
 				var move_tile = Vector2(path[i].x, path[i].y)
+				if move_tile == game.player_tile:
+					blocked = true
 				for enemy in game.enemies:
 					if enemy.tile == move_tile:
 						blocked = true

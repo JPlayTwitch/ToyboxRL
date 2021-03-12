@@ -158,8 +158,11 @@ func build_level():
 		var x = room.position.x + 1 + randi() % int(room.size.x-2)
 		var y = room.position.y + 1 + randi() % int(room.size.y-2)
 		if map[x][y] == tile_floor:
-			beans.append(Beans.Bean.new(self,x,y,randi() % BeanCatalogue.Effects.size()))
-			bean_counter -= 1
+			if x == player_tile.x && y == player_tile.y:
+				pass
+			else:
+				beans.append(Beans.Bean.new(self,x,y,randi() % BeanCatalogue.Effects.size()))
+				bean_counter -= 1
 		
 	
 	# Place Enemies
