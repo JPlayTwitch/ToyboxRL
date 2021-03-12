@@ -1,7 +1,7 @@
 extends Node2D
 
 #TESTING ONLY
-var visibility_disabled = false
+var visibility_disabled = true
 
 # Display
 const WINDOW_WIDTH = 1280
@@ -43,11 +43,14 @@ var Beans = preload("res://Items/Beans.gd")
 # Tileset
 enum Tile {Wall,Floor1,Floor2,Ladder,Stone,Amulet}
 enum Visibility {Undiscovered,Fog,Visible}
+enum FloorType{Std,Chess}
 
 # Current Level
 var level_num = 0
 var map = []
+var floor_type = []
 var rooms = []
+var rooms_type = []
 var level_size
 var enemies = []
 var beans = []
@@ -66,6 +69,7 @@ onready var tile_wall_ul = tile_map.tile_set.find_tile_by_name("WallCornerUL")
 onready var tile_wall_ur = tile_map.tile_set.find_tile_by_name("WallCornerUR")
 onready var tile_wall_dl = tile_map.tile_set.find_tile_by_name("WallCornerDL")
 onready var tile_wall_dr = tile_map.tile_set.find_tile_by_name("WallCornerDR")
+onready var tile_chess = tile_map.tile_set.find_tile_by_name("Chessboard")
 
 
 # Game State
@@ -102,6 +106,8 @@ func build_level():
 	map.clear()
 	tile_map.clear()
 	visibility_map.clear()
+	floor_type.clear()
+	rooms_type.clear()
 	
 	for enemy in enemies:
 		enemy.remove()
@@ -117,10 +123,12 @@ func build_level():
 	level_size = LEVEL_SIZES[level_num]
 	for x in range(level_size.x):
 		map.append([])
+		floor_type.append([])
 		for y in range(level_size.y):
 			map[x].append(tile_stone)
 			tile_map.set_cell(x,y,tile_stone)
 			visibility_map.set_cell(x,y,Visibility.Undiscovered)
+			floor_type[x].append([FloorType.Std])
 	
 	# Make Rooms
 	var free_regions = [Rect2(Vector2(2,2), level_size - Vector2(4,4))]
@@ -148,9 +156,9 @@ func build_level():
 	var ladder_x = end_room.position.x + 1 + (randi() % int(end_room.size.x - 2))
 	var ladder_y = end_room.position.y + 1 + (randi() % int(end_room.size.y - 2))
 	if level_num + 1 < LEVEL_ROOM_COUNTS.size():
-		set_tile(ladder_x,ladder_y,tile_ladder)
+		set_tile(ladder_x,ladder_y,tile_ladder,FloorType.Std)
 	else:
-		set_tile(ladder_x,ladder_y,tile_amulet)
+		set_tile(ladder_x,ladder_y,tile_amulet,FloorType.Std)
 	
 	var bean_counter = BEAN_GEN[level_num]
 	while bean_counter > 0:
@@ -358,11 +366,7 @@ func add_random_connection(stone_graph,room_graph):
 	path.append(start_position)
 	path.append(end_position)
 	for position in path:
-		set_tile(position.x,position.y,tile_floor)
-#		if (int(position.x + position.y) % 2) == 1:
-#			set_tile(position.x,position.y,Tile.Floor1)
-#		else:
-#			set_tile(position.x,position.y,Tile.Floor2)
+		set_tile(position.x,position.y,tile_floor,FloorType.Std)
 	
 	room_graph.connect_points(start_room_id,end_room_id)
 
@@ -440,21 +444,29 @@ func add_room(free_regions):
 	if region.size.y > size_y:
 		start_y += randi() % int(region.size.y - size_y)
 	
+	
 	# Add Room to List
 	var room = Rect2(start_x,start_y,size_x,size_y)
 	rooms.append(room)
+	var room_type
+	if size_x == 10 && size_y == 10:
+		room_type = FloorType.Chess
+	else:
+		room_type = FloorType.Std
+	
+	rooms_type.append(room_type)
 	
 	# Set Room Tiles
 	for x in range(start_x,start_x + size_x):
-		set_tile(x,start_y, tile_wall)
-		set_tile(x,start_y + size_y - 1, tile_wall)
+		set_tile(x,start_y, tile_wall,FloorType.Std)
+		set_tile(x,start_y + size_y - 1, tile_wall,FloorType.Std)
 	
 	for y in range(start_y+1, start_y + size_y - 1):
-		set_tile(start_x, y, tile_wall)
-		set_tile(start_x + size_x - 1, y, tile_wall)
+		set_tile(start_x, y, tile_wall,FloorType.Std)
+		set_tile(start_x + size_x - 1, y, tile_wall,FloorType.Std)
 		
 		for x in range(start_x + 1, start_x + size_x - 1):
-			set_tile(x,y,tile_floor)
+			set_tile(x,y,tile_floor,room_type)
 #			tile_map[x][y].set_frame(1)
 #			if ((x + y) % 2) == 1:
 #				set_tile(x,y,Tile.Floor1)
@@ -496,12 +508,24 @@ func cut_regions(free_regions,region_to_remove):
 	for region in addition_queue:
 		free_regions.append(region)
 
-func set_tile(x, y, type):
+func set_tile(x, y, type,floor_type):
 	map[x][y] = type
-	if int(x + y) % 2 == 1:
-		tile_map.set_cell(x,y,type,false,false,false,Vector2(1,0))
+	if type == tile_floor:
+		if floor_type == FloorType.Chess:
+			if int(x + y) % 2 == 1:
+				tile_map.set_cell(x,y,tile_chess,false,false,false,Vector2(1,0))
+			else:
+				tile_map.set_cell(x,y,tile_chess,false,false,false,Vector2(0,0))
+		else:
+			if int(x + y) % 2 == 1:
+				tile_map.set_cell(x,y,type,false,false,false,Vector2(1,0))
+			else:
+				tile_map.set_cell(x,y,type,false,false,false,Vector2(0,0))
 	else:
-		tile_map.set_cell(x,y,type,false,false,false,Vector2(0,0))
+		if int(x + y) % 2 == 1:
+			tile_map.set_cell(x,y,type,false,false,false,Vector2(1,0))
+		else:
+			tile_map.set_cell(x,y,type,false,false,false,Vector2(0,0))
 	
 	match type:
 		tile_floor:
