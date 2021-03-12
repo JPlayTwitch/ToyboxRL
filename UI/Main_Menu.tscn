@@ -29,4 +29,15 @@ text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RichTextLabel" type="Label" parent="CanvasLayer"]
+margin_left = 96.0
+margin_top = 576.0
+margin_right = 672.0
+margin_bottom = 640.0
+text = "You've been shrunk. Or turned into a toy. Or are hallucinating like in Joe the Barbarian. Or some other flimsy pretext for why you now need to descend to floor 5 and find the magic can while fighting assorted copyright-free toys."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="CanvasLayer/New Game" to="." method="_on_NewGame_pressed"]
