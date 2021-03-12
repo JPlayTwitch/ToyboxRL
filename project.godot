@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ToyboxRL"
-run/main_scene="res://Scripts/Game.tscn"
+run/main_scene="res://UI/Main_Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

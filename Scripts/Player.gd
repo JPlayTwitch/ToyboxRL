@@ -6,6 +6,7 @@ onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 signal turn_advance
 
 func _input(event):
+	var game = get_parent()
 	if !event.is_pressed():
 		return
 	
@@ -56,34 +57,34 @@ func _input(event):
 			InvUI.visible = false
 		if event.is_action("InvSlot0"):
 			if InvDict.inventory.size()>0:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[0])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[0],game)
 		if event.is_action("InvSlot1"):
 			if InvDict.inventory.size()>1:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[1])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[1],game)
 		if event.is_action("InvSlot2"):
 			if InvDict.inventory.size()>2:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[2])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[2],game)
 		if event.is_action("InvSlot3"):
 			if InvDict.inventory.size()>3:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[3])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[3],game)
 		if event.is_action("InvSlot4"):
 			if InvDict.inventory.size()>4:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[4])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[4],game)
 		if event.is_action("InvSlot5"):
 			if InvDict.inventory.size()>5:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[5])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[5],game)
 		if event.is_action("InvSlot6"):
 			if InvDict.inventory.size()>6:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[6])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[6],game)
 		if event.is_action("InvSlot7"):
 			if InvDict.inventory.size()>7:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[7])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[7],game)
 		if event.is_action("InvSlot8"):
 			if InvDict.inventory.size()>8:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[8])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[8],game)
 		if event.is_action("InvSlot9"):
 			if InvDict.inventory.size()>9:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[9])
+				BeanCatalogue.use_bean(InvDict.inventory.keys()[9],game)
 
 func try_move(dx,dy):
 	

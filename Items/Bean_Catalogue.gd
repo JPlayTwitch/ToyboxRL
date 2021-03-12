@@ -1,7 +1,9 @@
 extends Node
 
-onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
-onready var game = get_node("/root/Game/")
+signal MLogAppend
+
+var mess_log = MessageLog.get_node("MLogText")
+#onready var game = get_node("/root/Game/")
 onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 
 
@@ -41,44 +43,45 @@ func assign_beans():
 		bean_name_tasted[i] = "[color="+bean_colour[flavour]+"]"+flavour_text[flavour]+" Jelly Bean of "+effects_text[i]+"[/color]"
 		tasted[i] = false
 
-func use_bean(effect_str):
+func use_bean(effect_str,game):
 	var effect = effects_text.find(effect_str)
 	
 	if tasted[effect]:
-		mess_log.append_bbcode("\n You ate a "+bean_name_tasted[effect]+".")
+		emit_signal("MLogAppend","\n You ate a "+bean_name_tasted[effect]+".")
 	else:
-		mess_log.append_bbcode("\n You ate a "+bean_name_untasted[effect]+".\n It must have been a "+bean_name_tasted[effect]+".")
+		emit_signal("MLogAppend","\n You ate a "+bean_name_untasted[effect]+".\n It must have been a "+bean_name_tasted[effect]+".")
 		tasted[effect] = true
+	print("should be working")
 	match effect:
 		Effects.BRAWN:
-			mess_log.append_bbcode("\n You feel stronger.")
+			emit_signal("MLogAppend","\n You feel stronger.")
 			PlayerStats.strength += 2
 			game.update_visuals()
 		Effects.ENDURANCE:
-			mess_log.append_bbcode("\n You feel more resilient.")
+			emit_signal("MLogAppend","\n You feel more resilient.")
 			var hp_increase = int(PlayerStats.max_hp*0.2)
 			PlayerStats.max_hp = PlayerStats.max_hp + hp_increase
 			PlayerStats.hp = min(PlayerStats.hp + hp_increase,PlayerStats.max_hp)
 			game.update_visuals()
 		Effects.PERPLEXITY:
-			mess_log.append_bbcode("\n You feel confused.")
+			emit_signal("MLogAppend","\n You feel confused.")
 			PlayerStats.confused += 20
 			game.update_visuals()
 		Effects.PARALYSIS:
-			mess_log.append_bbcode("\n You are frozen in place. Press space to continue.")
+			emit_signal("MLogAppend","\n You are frozen in place. Press space to continue.")
 			PlayerStats.paralysed = true
 			InvUI.visible = false
 			game.update_visuals()
 		Effects.HEALING:
-			mess_log.append_bbcode("\n You feel much better.")
+			emit_signal("MLogAppend","\n You feel much better.")
 			PlayerStats.hp = min(PlayerStats.hp+int(0.5*PlayerStats.max_hp),PlayerStats.max_hp)
 			game.update_visuals()
 		Effects.LITHENESS:
-			mess_log.append_bbcode("\n You feel positively limber.")
+			emit_signal("MLogAppend","\n You feel positively limber.")
 			PlayerStats.evasion = min(PlayerStats.evasion+5, 90)
 			game.update_visuals()
 		Effects.ENFEEBLEMENT:
-			mess_log.append_bbcode("\n Everything feels a little more difficult.")
+			emit_signal("MLogAppend","\n Everything feels a little more difficult.")
 			PlayerStats.strength -= 2
 			game.update_visuals()
 	InvDict.removeitem(effect_str)
