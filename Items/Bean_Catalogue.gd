@@ -34,9 +34,9 @@ func assign_beans():
 
 	# create the bean types
 	for i in range(Effects.size()):
-		var flavour = randi() % flavour_list.size()
+		var flavour = flavour_list[randi() % flavour_list.size()]
 		bean_flavour[i] = flavour
-		flavour_list.remove(flavour)
+		flavour_list.erase(flavour)
 		bean_name_untasted[i] = "[color="+bean_colour[flavour]+"]Mysterious "+flavour_text[flavour]+" Jelly Bean[/color]"
 		bean_name_tasted[i] = "[color="+bean_colour[flavour]+"]"+flavour_text[flavour]+" Jelly Bean of "+effects_text[i]+"[/color]"
 		tasted[i] = false
