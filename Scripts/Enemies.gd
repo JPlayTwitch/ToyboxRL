@@ -1,10 +1,11 @@
 extends Node
 
-enum EnemyTypes {Teddy,Soldier,Nutcracker}
+enum EnemyTypes {Teddy,Soldier,Nutcracker,RCCar}
 
 const EnemyTeddy = preload("res://Enemies/Teddy.tscn")
 const EnemySoldier = preload("res://Enemies/Soldier.tscn")
 const EnemyNutcracker = preload("res://Enemies/Nutcracker.tscn")
+const EnemyRCCar = preload("res://Enemies/RCCar.tscn")
 
 class Enemy extends Node:
 	var sprite_node
@@ -23,6 +24,8 @@ class Enemy extends Node:
 				sprite_node = EnemySoldier.instance()
 			EnemyTypes.Nutcracker:
 				sprite_node = EnemyNutcracker.instance()
+			EnemyTypes.RCCar:
+				sprite_node = EnemyRCCar.instance()
 			_:
 				sprite_node = EnemyTeddy.instance()
 		max_hp = sprite_node.max_hp
