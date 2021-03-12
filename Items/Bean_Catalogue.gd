@@ -6,7 +6,7 @@ onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 
 
 
-enum Effects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS}
+enum Effects {BRAWN, ENDURANCE, PERPLEXITY, PARALYSIS, HEALING, LITHENESS, ENFEEBLEMENT}
 enum Flavours {LICORICE, TANGERINE, STRAWBERRY, APPLE, BLUEBERRY, CAPPUCINO, WATERMELON, BUTTERSCOTCH, \
 	BUBBLEGUM, COCONUT, MINT, GRAPE}
 
@@ -16,7 +16,7 @@ var flavour_text = ["Licorice", "Tangerine", "Strawberry", "Green Apple", "Blueb
 var bean_colour = ["#464644", "#e68500", "#d80535", "#159341", "#0058a5", "#64371e", "#00562d", "#ddb889", \
 	"#ecc4fa", "#cdddf7", "#a1d9f8", "#653494"]
 
-var effects_text = ["Brawn", "Endurance", "Perplexity", "Paralysis", "Healing", "Litheness"]
+var effects_text = ["Brawn", "Endurance", "Perplexity", "Paralysis", "Healing", "Litheness", "Enfeeblement"]
 
 var bean_flavour = []
 var bean_name_tasted = []
@@ -52,7 +52,7 @@ func use_bean(effect_str):
 	match effect:
 		Effects.BRAWN:
 			mess_log.append_bbcode("\n You feel stronger.")
-			PlayerStats.strength += 1
+			PlayerStats.strength += 2
 			game.update_visuals()
 		Effects.ENDURANCE:
 			mess_log.append_bbcode("\n You feel more resilient.")
@@ -76,5 +76,9 @@ func use_bean(effect_str):
 		Effects.LITHENESS:
 			mess_log.append_bbcode("\n You feel positively limber.")
 			PlayerStats.evasion = min(PlayerStats.evasion+5, 90)
+			game.update_visuals()
+		Effects.ENFEEBLEMENT:
+			mess_log.append_bbcode("\n Everything feels a little more difficult.")
+			PlayerStats.strength -= 2
 			game.update_visuals()
 	InvDict.removeitem(effect_str)
