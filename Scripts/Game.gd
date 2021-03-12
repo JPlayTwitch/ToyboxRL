@@ -162,40 +162,39 @@ func build_level():
 	# Place Enemies
 #	Enemies.setup_array()
 	var num_enemies = LEVEL_ENEMY_PTS[level_num]
+	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
+	var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
+	var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
+	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
+	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker]
 	while num_enemies > 0:
 		var room = rooms[1 + randi() % (rooms.size() - 1)]
 		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
 		var y = room.position.y + 1 + randi() % int(room.size.y - 2)
 		
 		var blocked = false
-		for enemy in enemies:
-			if enemy.tile.x == x && enemy.tile.y == y:
-				blocked = true
-				break
+		if map[x][y] != tile_floor:
+			blocked = true
+		else:
+			for enemy in enemies:
+				if enemy.tile.x == x && enemy.tile.y == y:
+					blocked = true
+					break
 		
 		var enemy_type = 0
 		
-		var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
-		var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
-		var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
-		var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
-		var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker]
-		
-		match level_num:
-			0:
-				enemy_type = enemy_l0[randi() % enemy_l0.size()]
-			1:
-				enemy_type = enemy_l1[randi() % enemy_l1.size()]
-			2:
-				enemy_type = enemy_l2[randi() % enemy_l2.size()]
-			3:
-				enemy_type = enemy_l3[randi() % enemy_l3.size()]
-			4:
-				enemy_type = enemy_l4[randi() % enemy_l4.size()]
-		
-#		var enemy_type = Enemies.enemy_array[level_num][randi() % 5]
-		
 		if !blocked:
+			match level_num:
+				0:
+					enemy_type = enemy_l0[randi() % enemy_l0.size()]
+				1:
+					enemy_type = enemy_l1[randi() % enemy_l1.size()]
+				2:
+					enemy_type = enemy_l2[randi() % enemy_l2.size()]
+				3:
+					enemy_type = enemy_l3[randi() % enemy_l3.size()]
+				4:
+					enemy_type = enemy_l4[randi() % enemy_l4.size()]
 			var enemy = Enemies.Enemy.new(self,enemy_type,x,y)
 			num_enemies -= enemy.sprite_node.weighting
 			enemies.append(enemy)
