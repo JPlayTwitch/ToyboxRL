@@ -120,8 +120,8 @@ func try_move(dx,dy):
 			game.level_num += 1
 			game.build_level()
 		game.tile_amulet:
-			$HUD/EndScreen/Label.text = "You Win"
-			$HUD/EndScreen.visible = true
+			game.get_node("HUD/EndScreen/Label").text = "You Win"
+			game.get_node("HUD/EndScreen").visible = true
 	
 	
 	game.update_visuals()
