@@ -174,9 +174,9 @@ func build_level():
 		
 		var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
 		var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
-		var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
-		var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
-		var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier]
+		var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
+		var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker]
+		var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker]
 		
 		match level_num:
 			0:
