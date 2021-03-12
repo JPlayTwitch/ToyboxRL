@@ -2,13 +2,13 @@ extends Sprite
 
 #export onready var stats = $Stats
 
-export(int) var max_hp = 80
+export(int) var max_hp = 40
 onready var hp = max_hp
-export(int) var attack_dice = 5
-export(int) var strength = 12
-export(int) var weighting = 15
+export(int) var attack_dice = 3
+export(int) var strength = 3
+export(int) var weighting = 6
 export(int) var vision = 10
-export(int) var evasion = 4
+export(int) var evasion = 45
 var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 
@@ -25,10 +25,10 @@ func act(game,me):
 				var dmg = randi() % attack_dice + strength
 				var hit = randi() % 100 >= PlayerStats.evasion
 				if hit:
-					mess_log.append_bbcode("\n [color=#780308]Nutcracker[/color] chomped you for [color=#ff0000]" + str(dmg) + "[/color] damage")
+					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 					game.damage_player(dmg)
 				else:
-					mess_log.append_bbcode("\n [color=#780308]Nutcracker[/color] chomped at you, but missed")
+					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] swiped the air fruitlessly")
 				me.sprite_node.frame = 1
 				var t = Timer.new()
 				t.set_wait_time(0.2)
@@ -65,11 +65,11 @@ func take_damage(game,dmg):
 	var hit = randi() % 100 >= evasion
 	if hit:
 		hp = max(0, hp-dmg)
-		mess_log.append_bbcode("\n You hit [color=#780308]Nutcracker[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
+		mess_log.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
 		
 		if hp == 0:
-			mess_log.append_bbcode("\n [color=#780308]Nutcracker[/color] died")
+			mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] died")
 		if hp == 0:
 			dead = true#
 	else:
-		mess_log.append_bbcode("\n You missed the [color=#780308]Nutcracker[/color]")
+		mess_log.append_bbcode("\n You missed the [color=#bd9521]Teddy Bear[/color]")
