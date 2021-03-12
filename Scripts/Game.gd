@@ -569,9 +569,12 @@ func set_tile(x, y, type,floor_sprite):
 
 func _on_Button_pressed():
 	level_num = 0
-	build_level()
-	$HUD/EndScreen.visible = false
 	PlayerStats.hp = PlayerStats.max_hp
+	build_level()
+	MessageLog.get_node("MLogText").bbcode_text = "New Game \n \n \n"
+	$HUD/EndScreen.visible = false
+	# I want to go back to the main menu but the game won't let me
+#	get_tree().change_scene("res://UI/MainMenu.tscn")
 
 
 func _on_Player_turn_advance():
