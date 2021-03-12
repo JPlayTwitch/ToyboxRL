@@ -145,14 +145,27 @@ func build_level():
 #	make_diagonals()
 	
 	# Place Player
-	var start_room = rooms.front()
+	var selected_room = null
+	while selected_room == null:
+		selected_room = randi() % rooms.size()
+		if rooms_type[selected_room] != FloorType.Std:
+			selected_room = null
+		
+	var start_room = rooms[selected_room]
 	var player_x = start_room.position.x + 1 + (randi() % int(start_room.size.x - 2))
 	var player_y = start_room.position.y + 1 + (randi() % int(start_room.size.y - 2))
 	player_tile = Vector2(player_x,player_y)
 	call_deferred("update_visuals")
 	
 	# Place ladder/Amulet
-	var end_room = rooms.back()
+	selected_room = null
+	while selected_room == null:
+		selected_room = randi() % rooms.size()
+		if rooms[selected_room] == start_room:
+			selected_room = null
+		elif rooms_type[selected_room] != FloorType.Std:
+			selected_room = null
+	var end_room = rooms[selected_room]
 	var ladder_x = end_room.position.x + 1 + (randi() % int(end_room.size.x - 2))
 	var ladder_y = end_room.position.y + 1 + (randi() % int(end_room.size.y - 2))
 	if level_num + 1 < LEVEL_ROOM_COUNTS.size():
@@ -174,7 +187,6 @@ func build_level():
 		
 	
 	# Place Enemies
-#	Enemies.setup_array()
 	var num_enemies = LEVEL_ENEMY_PTS[level_num]
 	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
 	var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.RCCar]
@@ -182,7 +194,7 @@ func build_level():
 	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	while num_enemies > 0:
-		var room = rooms[1 + randi() % (rooms.size() - 1)]
+		var room = rooms[randi() % (rooms.size())]
 		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
 		var y = room.position.y + 1 + randi() % int(room.size.y - 2)
 		
