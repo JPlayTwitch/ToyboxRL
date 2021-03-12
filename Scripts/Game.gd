@@ -1,5 +1,8 @@
 extends Node2D
 
+#TESTING ONLY
+var visibility_disabled = false
+
 # Display
 const WINDOW_WIDTH = 1280
 const WINDOW_HEIGHT = 740
@@ -255,16 +258,19 @@ func update_visuals():
 	
 	for x in range(level_size.x):
 		for y in range(level_size.y):
-			x_dir = 1 if x < player_tile.x else -1
-			y_dir = 1 if y < player_tile.y else -1
-			test_point = tile_to_pixel_center(x, y) + Vector2(x_dir, y_dir) * TILE_SIZE / 2
-			
-			var occlusion = space_state.intersect_ray(player_center, test_point, [self], 0b1)
-			
-			if !occlusion || (occlusion.position - test_point).length() < 0.1:
-				visibility_map.set_cell(x, y, Visibility.Visible)
-			elif visibility_map.get_cell(x,y) == Visibility.Visible:
-				visibility_map.set_cell(x,y,Visibility.Fog)
+			if !visibility_disabled:
+				x_dir = 1 if x < player_tile.x else -1
+				y_dir = 1 if y < player_tile.y else -1
+				test_point = tile_to_pixel_center(x, y) + Vector2(x_dir, y_dir) * TILE_SIZE / 2
+				
+				var occlusion = space_state.intersect_ray(player_center, test_point, [self], 0b1)
+				
+				if !occlusion || (occlusion.position - test_point).length() < 0.1:
+					visibility_map.set_cell(x, y, Visibility.Visible)
+				elif visibility_map.get_cell(x,y) == Visibility.Visible:
+					visibility_map.set_cell(x,y,Visibility.Fog)
+			else:
+				visibility_map.set_cell(x,y,Visibility.Visible)
 	
 	yield(get_tree(),"idle_frame")
 	
