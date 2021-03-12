@@ -14,6 +14,7 @@ func _input(event):
 		if event.is_action("ui_accept"):
 			pass_turns(20)
 			PlayerStats.paralysed = false
+			mess_log.append_bbcode("\n You are no longer paralysed")
 	
 	# non-inventory
 	if !InvUI.visible:
@@ -25,6 +26,8 @@ func _input(event):
 				try_move(randi() % 3 - 1, randi() % 3 - 1)
 				mess_log.append_bbcode("\n You are confused and wandering aimlessly")
 				PlayerStats.confused -= 1
+				if PlayerStats.confused == 0:
+					mess_log.append_bbcode("\n You are no longer confused")
 		#standard motion
 		else:
 			if event.is_action("Left"):
