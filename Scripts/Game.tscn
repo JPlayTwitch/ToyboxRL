@@ -411,5 +411,15 @@ vframes = 3
 hframes = 4
 script = ExtResource( 12 )
 item_slot = 9
+
+[node name="Label" type="Label" parent="Inventory/Inventory"]
+margin_left = 160.0
+margin_top = -192.0
+margin_right = 200.0
+margin_bottom = -178.0
+text = "[esc]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]

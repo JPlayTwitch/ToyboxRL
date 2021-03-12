@@ -135,7 +135,7 @@ func pickup_items():
 			remove_queue.append(bean)
 			bean.remove()
 			InvDict.additem(BeanCatalogue.effects_text[bean.effect])
-			print(InvDict.inventory)
+#			print(InvDict.inventory)
 	
 	for bean in remove_queue:
 		game.beans.erase(bean)
