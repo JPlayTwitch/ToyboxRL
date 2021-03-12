@@ -194,7 +194,14 @@ func build_level():
 	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	while num_enemies > 0:
-		var room = rooms[randi() % (rooms.size())]
+		var usable_room = false
+		var room_num
+		while usable_room == false:
+			room_num = randi() % (rooms.size())
+			if rooms_type[room_num] == FloorType.Std && rooms[room_num] != start_room:
+				usable_room = true
+		var room = rooms[room_num]
+		
 		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
 		var y = room.position.y + 1 + randi() % int(room.size.y - 2)
 		
