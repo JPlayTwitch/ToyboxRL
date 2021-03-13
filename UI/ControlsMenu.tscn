@@ -1,0 +1,268 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/ControlsMenu.gd" type="Script" id=1]
+[ext_resource path="res://CothamSans.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/Control_Arrows.png" type="Texture" id=3]
+[ext_resource path="res://UI/CtrlBtn.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 2 )
+
+[node name="ControlsMenu" type="ColorRect"]
+margin_left = 736.0
+margin_top = 96.0
+margin_right = 1120.0
+margin_bottom = 672.0
+color = Color( 0.435294, 0.439216, 0.392157, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsLabel" type="Label" parent="."]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 285.0
+margin_bottom = 83.0
+custom_fonts/font = SubResource( 1 )
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpLeft" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 160.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "UpLeft"
+
+[node name="Up" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 160.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Up"
+
+[node name="UpRight" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 160.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "UpRight"
+
+[node name="Left" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 128.0
+margin_bottom = 256.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Left"
+
+[node name="Right" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 320.0
+margin_bottom = 256.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Right"
+
+[node name="DownLeft" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 64.0
+margin_top = 288.0
+margin_right = 128.0
+margin_bottom = 352.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "DownLeft"
+
+[node name="Down" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 160.0
+margin_top = 288.0
+margin_right = 224.0
+margin_bottom = 352.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+key = "Down"
+
+[node name="DownRight" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 256.0
+margin_top = 288.0
+margin_right = 320.0
+margin_bottom = 352.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "DownRight"
+
+[node name="Wait" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 64.0
+margin_top = 416.0
+margin_right = 128.0
+margin_bottom = 448.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+key = "Wait"
+
+[node name="Accept" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 160.0
+margin_top = 416.0
+margin_right = 224.0
+margin_bottom = 448.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+key = "ui_accept"
+
+[node name="Inventory" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 256.0
+margin_top = 416.0
+margin_right = 320.0
+margin_bottom = 448.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Inventory"
+
+[node name="WaitLabel" type="Label" parent="."]
+margin_left = 64.0
+margin_top = 384.0
+margin_right = 128.0
+margin_bottom = 416.0
+text = "Wait:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AcceptLabel" type="Label" parent="."]
+margin_left = 160.0
+margin_top = 384.0
+margin_right = 224.0
+margin_bottom = 416.0
+text = "Accept:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvLabel" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 384.0
+margin_right = 321.0
+margin_bottom = 416.0
+text = "Inventory:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control_Arrows" type="Sprite" parent="."]
+position = Vector2( 192, 224 )
+texture = ExtResource( 3 )
+
+[node name="Undo Changes" type="Button" parent="."]
+margin_top = 512.0
+margin_right = 192.0
+margin_bottom = 576.0
+text = "Undo Changes"
+
+[node name="Save Changes" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 512.0
+margin_right = 384.0
+margin_bottom = 576.0
+text = "Save Changes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Undo Changes" to="." method="_on_Undo_Changes_pressed"]
+[connection signal="pressed" from="Save Changes" to="." method="_on_Save_Changes_pressed"]

@@ -25,7 +25,19 @@ margin_left = 768.0
 margin_top = 480.0
 margin_right = 1024.0
 margin_bottom = 512.0
+rect_pivot_offset = Vector2( 224, 32 )
 text = "New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="CanvasLayer"]
+margin_left = 768.0
+margin_top = 544.0
+margin_right = 1024.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 224, 32 )
+text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,3 +53,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="CanvasLayer/New Game" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controls" to="." method="_on_Controls_pressed"]
