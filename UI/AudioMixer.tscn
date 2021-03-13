@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/VolSlider.gd" type="Script" id=1]
+[ext_resource path="res://UI/Audio.png" type="Texture" id=2]
+[ext_resource path="res://UI/Music.png" type="Texture" id=3]
+
+[node name="AudioMixer" type="ColorRect"]
+margin_left = 1056.0
+margin_top = 64.0
+margin_right = 1216.0
+margin_bottom = 416.0
+color = Color( 0, 0, 0, 0.560784 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVol" type="VSlider" parent="."]
+margin_left = 19.0
+margin_top = 32.0
+margin_right = 48.0
+margin_bottom = 288.0
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundVol" type="VSlider" parent="."]
+margin_left = 115.0
+margin_top = 32.0
+margin_right = 144.0
+margin_bottom = 288.0
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+audio_bus_name = "Sounds"
+
+[node name="Audio" type="Sprite" parent="."]
+position = Vector2( 96, 288 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Music" type="Sprite" parent="."]
+position = Vector2( 32, 320 )
+texture = ExtResource( 3 )
+[connection signal="mouse_exited" from="MusicVol" to="MusicVol" method="_on_mouse_exited"]
+[connection signal="value_changed" from="MusicVol" to="MusicVol" method="_on_value_changed"]
+[connection signal="mouse_exited" from="SoundVol" to="SoundVol" method="_on_mouse_exited"]
+[connection signal="value_changed" from="SoundVol" to="SoundVol" method="_on_value_changed"]

@@ -13,9 +13,9 @@
 [ext_resource path="res://Sprites/Items/Beans.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/InvIcon.gd" type="Script" id=12]
 [ext_resource path="res://Audio/Music/ToyboxRL Theme.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Scripts/VolSlider.gd" type="Script" id=14]
 [ext_resource path="res://UI/Audio.png" type="Texture" id=15]
-[ext_resource path="res://UI/Music.png" type="Texture" id=16]
+[ext_resource path="res://UI/AudioSelected.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Visibility_Undiscovered.png 0"
@@ -78,6 +78,7 @@ format = 1
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 17 )
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 margin_right = 96.0
@@ -168,59 +169,13 @@ margin_right = 672.0
 margin_bottom = 448.0
 text = "Reset"
 
-[node name="AudioMixer" type="ColorRect" parent="HUD"]
-margin_left = 1056.0
-margin_top = 64.0
-margin_right = 1216.0
-margin_bottom = 416.0
-color = Color( 0, 0, 0, 0.560784 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicVol" type="VSlider" parent="HUD/AudioMixer"]
-margin_left = 19.0
-margin_top = 32.0
-margin_right = 48.0
-margin_bottom = 288.0
-max_value = 1.0
-step = 0.05
-value = 0.5
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SoundVol" type="VSlider" parent="HUD/AudioMixer"]
-margin_left = 115.0
-margin_top = 32.0
-margin_right = 144.0
-margin_bottom = 288.0
-max_value = 1.0
-step = 0.05
-value = 0.5
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-audio_bus_name = "Sounds"
-
-[node name="Audio" type="Sprite" parent="HUD/AudioMixer"]
-position = Vector2( 96, 288 )
-texture = ExtResource( 15 )
-centered = false
-
-[node name="Music" type="Sprite" parent="HUD/AudioMixer"]
-position = Vector2( 32, 320 )
-scale = Vector2( 1, 1 )
-texture = ExtResource( 16 )
-
-[node name="TextureButton" type="TextureButton" parent="HUD"]
+[node name="AudioButton" type="TextureButton" parent="HUD"]
 margin_left = 1216.0
 margin_right = 1280.0
 margin_bottom = 64.0
+toggle_mode = true
 texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 15 )
 texture_disabled = ExtResource( 15 )
 texture_focused = ExtResource( 15 )
@@ -493,7 +448,4 @@ autoplay = true
 bus = "Music"
 [connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]
-[connection signal="mouse_exited" from="HUD/AudioMixer/MusicVol" to="HUD/AudioMixer/MusicVol" method="_on_mouse_exited"]
-[connection signal="value_changed" from="HUD/AudioMixer/MusicVol" to="HUD/AudioMixer/MusicVol" method="_on_value_changed"]
-[connection signal="mouse_exited" from="HUD/AudioMixer/SoundVol" to="HUD/AudioMixer/SoundVol" method="_on_mouse_exited"]
-[connection signal="value_changed" from="HUD/AudioMixer/SoundVol" to="HUD/AudioMixer/SoundVol" method="_on_value_changed"]
+[connection signal="toggled" from="HUD/AudioButton" to="HUD" method="_on_TextureButton_toggled"]
