@@ -156,6 +156,8 @@ func build_level():
 	var player_x = start_room.position.x + 1 + (randi() % int(start_room.size.x - 2))
 	var player_y = start_room.position.y + 1 + (randi() % int(start_room.size.y - 2))
 	player_tile = Vector2(player_x,player_y)
+#	var enemytest = Enemies.Enemy.new(self,Enemies.EnemyTypes.DrinkingBird,player_x+2,player_y+2)
+#	enemies.append(enemytest)
 	call_deferred("update_visuals")
 	
 	# Place ladder/Amulet
@@ -191,7 +193,7 @@ func build_level():
 	var num_enemies = LEVEL_ENEMY_PTS[level_num]
 	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
 	var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.RCCar]
-	var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
+	var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.DrinkingBird]
 	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	while num_enemies > 0:
