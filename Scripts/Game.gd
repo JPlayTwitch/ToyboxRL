@@ -99,6 +99,7 @@ func damage_player(dmg):
 	if PlayerStats.hp == 0:
 		$HUD/EndScreen/Label.text = "You Lose"
 		$HUD/EndScreen.visible = true
+		$Music.pitch_scale = 0.73
 
 func build_level():
 	# start with a blank map
@@ -573,6 +574,7 @@ func _on_Button_pressed():
 	build_level()
 	MessageLog.get_node("MLogText").bbcode_text = "New Game \n \n \n"
 	$HUD/EndScreen.visible = false
+	$Music.pitch_scale = 1
 	# I want to go back to the main menu but the game won't let me
 #	get_tree().change_scene("res://UI/MainMenu.tscn")
 

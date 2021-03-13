@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ToyboxRL Theme.ogg-6548b5098fccd323850a9fb9df7ab0c0.oggstr"
+
+[deps]
+
+source_file="res://Audio/Music/ToyboxRL Theme.ogg"
+dest_files=[ "res://.import/ToyboxRL Theme.ogg-6548b5098fccd323850a9fb9df7ab0c0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
