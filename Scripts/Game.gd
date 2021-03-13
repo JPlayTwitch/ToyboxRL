@@ -160,21 +160,38 @@ func build_level():
 #	enemies.append(enemytest)
 	call_deferred("update_visuals")
 	
-	# Place ladder/Amulet
-	selected_room = null
-	while selected_room == null:
-		selected_room = randi() % rooms.size()
-		if rooms[selected_room] == start_room:
-			selected_room = null
-		elif rooms_type[selected_room] != FloorType.Std:
-			selected_room = null
-	var end_room = rooms[selected_room]
-	var ladder_x = end_room.position.x + 1 + (randi() % int(end_room.size.x - 2))
-	var ladder_y = end_room.position.y + 1 + (randi() % int(end_room.size.y - 2))
+	# Place ladder
 	if level_num + 1 < LEVEL_ROOM_COUNTS.size():
+		selected_room = null
+		while selected_room == null:
+			selected_room = randi() % rooms.size()
+			if rooms[selected_room] == start_room:
+				selected_room = null
+			elif rooms_type[selected_room] != FloorType.Std:
+				selected_room = null
+		var end_room = rooms[selected_room]
+		var ladder_x = end_room.position.x + 1 + (randi() % int(end_room.size.x - 2))
+		var ladder_y = end_room.position.y + 1 + (randi() % int(end_room.size.y - 2))
 		set_tile(ladder_x,ladder_y,tile_ladder,FloorType.Std)
 	else:
-		set_tile(ladder_x,ladder_y,tile_amulet,FloorType.Std)
+		selected_room = null
+		while selected_room == null:
+			selected_room = randi() % rooms.size()
+			if rooms[selected_room] == start_room:
+				selected_room = null
+			elif rooms_type[selected_room] != FloorType.Std:
+				selected_room = null
+			elif rooms[selected_room].size.x < 8 || rooms[selected_room].size.y < 8:
+				selected_room = null
+		var end_room = rooms[selected_room]
+		var amulet_x = end_room.position.x + (int(end_room.size.x/2))
+		var amulet_y = end_room.position.y + (int(end_room.size.y/2))
+		set_tile(amulet_x,amulet_y,tile_amulet,FloorType.Std)
+		for x in range(-1,2,1):
+			for y in range(-1,2,1):
+				if !(x == 0 && y == 0):
+					var enemyspecial = Enemies.Enemy.new(self,Enemies.EnemyTypes.DrinkingBird,amulet_x+x,amulet_y+y)
+					enemies.append(enemyspecial)
 	
 	var bean_counter = BEAN_GEN[level_num]
 	while bean_counter > 0:
