@@ -1,5 +1,6 @@
 extends Node2D
 
+var CtrlsMenu = preload("res://UI/ControlsMenu.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -23,4 +24,4 @@ func _on_NewGame_pressed():
 
 
 func _on_Controls_pressed():
-	pass # Replace with function body.
+	$CanvasLayer.add_child(CtrlsMenu.instance())

@@ -10,10 +10,10 @@ size = 50
 font_data = ExtResource( 2 )
 
 [node name="ControlsMenu" type="ColorRect"]
-margin_left = 96.0
-margin_top = 64.0
-margin_right = 480.0
-margin_bottom = 640.0
+margin_left = 736.0
+margin_top = 96.0
+margin_right = 1120.0
+margin_bottom = 672.0
 color = Color( 0.435294, 0.439216, 0.392157, 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -261,5 +261,8 @@ margin_top = 512.0
 margin_right = 384.0
 margin_bottom = 576.0
 text = "Save Changes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Undo Changes" to="." method="_on_Undo_Changes_pressed"]
 [connection signal="pressed" from="Save Changes" to="." method="_on_Save_Changes_pressed"]
