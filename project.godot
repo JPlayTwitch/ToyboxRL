@@ -30,6 +30,7 @@ MessageLog="*res://UI/MessageLog.tscn"
 BeanCatalogue="*res://Items/Bean_Catalogue.gd"
 InvDict="*res://Scripts/InvDict.tscn"
 PlayerStats="*res://Scripts/PlayerStats.gd"
+Global="*res://Scripts/Global.gd"
 
 [display]
 

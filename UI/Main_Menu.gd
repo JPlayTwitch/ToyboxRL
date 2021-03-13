@@ -20,3 +20,7 @@ func _on_NewGame_pressed():
 #	$"CanvasLayer/New Game".pressed = false
 	get_tree().change_scene("res://Scripts/Game.tscn")
 	pass # Replace with function body.
+
+
+func _on_Controls_pressed():
+	pass # Replace with function body.
