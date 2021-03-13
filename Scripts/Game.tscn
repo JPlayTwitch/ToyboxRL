@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Sprites/Items/Beans.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/InvIcon.gd" type="Script" id=12]
 [ext_resource path="res://Audio/Music/ToyboxRL Theme.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Scripts/Inventory.gd" type="Script" id=14]
 [ext_resource path="res://UI/Audio.png" type="Texture" id=15]
 [ext_resource path="res://UI/AudioSelected.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=17]
@@ -192,6 +193,7 @@ visible = false
 position = Vector2( 544, 416 )
 texture = ExtResource( 7 )
 offset = Vector2( 0, -16 )
+script = ExtResource( 14 )
 
 [node name="Title" type="Label" parent="Inventory/Inventory"]
 margin_left = -160.0

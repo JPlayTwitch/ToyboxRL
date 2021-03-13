@@ -3,8 +3,7 @@ extends Node
 signal MLogAppend
 
 var mess_log = MessageLog.get_node("MLogText")
-#onready var game = get_node("/root/Game/")
-onready var InvUI = get_node("/root/Game/Inventory/Inventory")
+signal CloseInv
 
 
 
@@ -70,7 +69,7 @@ func use_bean(effect_str,game):
 		Effects.PARALYSIS:
 			emit_signal("MLogAppend","\n You are frozen in place. Press space to continue.")
 			PlayerStats.paralysed = true
-			InvUI.visible = false
+			emit_signal("CloseInv")
 			game.update_visuals()
 		Effects.HEALING:
 			emit_signal("MLogAppend","\n You feel much better.")
