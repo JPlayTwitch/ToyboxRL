@@ -220,11 +220,15 @@ func build_level():
 	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
 	while num_enemies > 0:
 		var usable_room = false
+		var emergency_room_break = 0 # to stop the fringe case where every room is a special room and enemies can't spawn
 		var room_num
-		while usable_room == false:
+		while usable_room == false: # loop a room selection until you find a valid one for enemy placement
 			room_num = randi() % (rooms.size())
 			if rooms_type[room_num] == FloorType.Std && rooms[room_num] != start_room:
 				usable_room = true
+			if rooms[room_num] != start_room && emergency_room_break>50:
+				usable_room = true
+			emergency_room_break += 1
 		var room = rooms[room_num]
 		
 		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
