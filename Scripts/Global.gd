@@ -1,6 +1,6 @@
 extends Node
 
-var filepath = "res://keybinds.ini"
+var filepath = "res://config.ini"
 var config_file
 
 var keybinds = {}
@@ -8,6 +8,8 @@ var keybinds = {}
 var game_state = "standard"
 
 var show_log = false
+
+onready var music_bus := AudioServer.get_bus_index("Music")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +21,8 @@ func _ready():
 #			print(key," : ",OS.get_scancode_string(key_value))
 			
 			keybinds[key] = key_value
+		var music_value = config_file.get_value("audio","Music")
+		AudioServer.set_bus_volume_db(music_bus, linear2db(music_value))
 	else:
 		print("CONFIG FILE NOT FOUND")
 		get_tree().quit()
@@ -41,4 +45,8 @@ func write_config():
 	for key in keybinds.keys():
 		var key_value = keybinds[key]
 		config_file.set_value("keybinds", key, key_value)
+	config_file.save(filepath)
+
+func write_audio(audio_bus_name,key_value):
+	config_file.set_value("audio",audio_bus_name,key_value)
 	config_file.save(filepath)

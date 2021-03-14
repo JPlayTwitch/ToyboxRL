@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _on_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(_bus, linear2db(value))
+	Global.write_audio(audio_bus_name,value)
 
 
 func _on_mouse_exited():
