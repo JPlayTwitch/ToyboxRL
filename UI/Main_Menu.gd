@@ -1,6 +1,7 @@
 extends Node2D
 
 var CtrlsMenu = preload("res://UI/ControlsMenu.tscn")
+var CreditsScreen = preload("res://UI/CreditsScreen.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -25,3 +26,7 @@ func _on_NewGame_pressed():
 
 func _on_Controls_pressed():
 	$CanvasLayer.add_child(CtrlsMenu.instance())
+
+
+func _on_Credits_pressed():
+	$CanvasLayer.add_child(CreditsScreen.instance())

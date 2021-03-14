@@ -1,0 +1,140 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/LinkButton.gd" type="Script" id=1]
+[ext_resource path="res://UI/CreditsScreen.gd" type="Script" id=2]
+
+[node name="CreditsScreen" type="ColorRect"]
+margin_right = 1280.0
+margin_bottom = 740.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 1024.0
+margin_bottom = 192.0
+text = "Game made by JPlay for 7DRL 2021 (as a learning-Godot sort of project, sorry if it's not good)
+
+Most heavily used tutorials:
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 288.0
+margin_right = 1024.0
+margin_bottom = 352.0
+text = "Additional thanks to the Discord and Twitch Godot community and my Twitch chat for walking me through things when I was too dense to troubleshoot on my own."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 352.0
+margin_right = 1024.0
+margin_bottom = 448.0
+text = "Key influences: Brogue & all the other roguelikes I spend my life playing
+Grant Morrison et al's Joe the Barbarian (hence the soda can at the end)
+Toy Story
+The Nutcracker
+Fantastic Voyage"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 448.0
+margin_right = 1024.0
+margin_bottom = 608.0
+text = "Music made in FL Studio using Massive and the Kontakt libraries Carillon and WaveFactory's Music Box & standard FL VSTs.
+
+Font used on like one screen was Cotham Sans, because I now can't figure out how to use it anywhere else.
+
+All sprites made in GIMP
+
+Git backups saved my arse."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 160.0
+margin_right = 1024.0
+margin_bottom = 192.0
+text = "ThoughtQuake's \"Building a Roguelike from Scratch in Godot, \"Dungeon of Recycling\"\""
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shortcutURL = "https://www.youtube.com/watch?v=vQ1UGbUlzH4"
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 1024.0
+margin_bottom = 224.0
+text = "HeartBeast's \"Make an Action RPG in Godot 3.2 (P14 | Enemy Stats + Export Variables + Setget)\""
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shortcutURL = "https://www.youtube.com/watch?v=srQz4Ix8rZM"
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 224.0
+margin_right = 1024.0
+margin_bottom = 256.0
+text = "Gonkee's \"Godot - How to make a Keybinds Settings Menu\""
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shortcutURL = "https://www.youtube.com/watch?v=I_Kzb-d-SvM"
+
+[node name="Button4" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 256.0
+margin_right = 1024.0
+margin_bottom = 288.0
+text = "GDQuest's \"Volume Slider\""
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shortcutURL = "https://www.gdquest.com/tutorial/godot/audio/volume-slider/"
+
+[node name="Button5" type="Button" parent="."]
+margin_left = 1216.0
+margin_top = 32.0
+margin_right = 1248.0
+margin_bottom = 64.0
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button3" to="Button3" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button4" to="Button4" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button5" to="." method="_on_Button5_pressed"]
