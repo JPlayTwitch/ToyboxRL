@@ -158,7 +158,6 @@ func try_move(dx,dy):
 			Global.show_log = false
 			mess_log.append_bbcode("\n You Win! \n \n \n")
 	
-	
 	game.update_visuals()
 
 func throw(dx,dy):
@@ -198,12 +197,13 @@ func throw(dx,dy):
 			old_x = x
 			old_y = y
 	game.beans.append(Beans.Bean.new(game,old_x,old_y,Selected_Bean.bean_type))
-	game.update_visuals()
 #	print("bean_dict: "+str(Selected_Bean.bean_dict))
 #	print("bean_str: "+str(Selected_Bean.bean_str))
 #	print("bean_type: "+str(Selected_Bean.bean_type))
 	InvDict.removeitem(Selected_Bean.bean_str)
 	Global.game_state = "standard"
+	emit_signal("turn_advance")
+	game.update_visuals()
 
 func pickup_items():
 	var game = get_node("/root/Game")
