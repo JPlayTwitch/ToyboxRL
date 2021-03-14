@@ -2,8 +2,11 @@ extends Sprite
 
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 onready var InvUI = get_node("/root/Game/Inventory/Inventory")
+onready var Selected_Bean = get_node("/root/Game/Inventory/Inventory/SelectedBean")
+var Beans = preload("res://Items/Beans.gd")
 
 signal turn_advance
+signal select_bean
 
 func _input(event):
 	var game = get_parent()
@@ -18,7 +21,7 @@ func _input(event):
 			mess_log.append_bbcode("\n You are no longer paralysed")
 	
 	# non-inventory
-	if !InvUI.visible:
+	if !InvUI.visible && Global.game_state == "standard":
 		#confused motion
 		if PlayerStats.confused > 0:
 			if event.is_action("Left") || event.is_action("Right") || event.is_action("Up") || event.is_action("Down") \
@@ -51,13 +54,15 @@ func _input(event):
 				emit_signal("turn_advance")
 		if event.is_action("Inventory"):
 			InvUI.visible = true
+			print(Global.game_state)
 	#inventory
-	else:
+	elif Global.game_state == "standard":
 		if event.is_action("ui_cancel"):
 			InvUI.visible = false
 		if event.is_action("InvSlot0"):
 			if InvDict.inventory.size()>0:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[0],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",0)
 		if event.is_action("InvSlot1"):
 			if InvDict.inventory.size()>1:
 				BeanCatalogue.use_bean(InvDict.inventory.keys()[1],game)
@@ -85,6 +90,24 @@ func _input(event):
 		if event.is_action("InvSlot9"):
 			if InvDict.inventory.size()>9:
 				BeanCatalogue.use_bean(InvDict.inventory.keys()[9],game)
+	if Global.game_state == "throwing":
+		if event.is_action("Left"):
+			throw(-1,0)
+		elif event.is_action("UpLeft"):
+			throw(-1,-1)
+		elif event.is_action("Up"):
+			throw(0,-1)
+		elif event.is_action("UpRight"):
+			throw(1,-1)
+		elif event.is_action("Right"):
+			throw(1,0)
+		elif event.is_action("DownRight"):
+			throw(1,1)
+		elif event.is_action("Down"):
+			throw(0,1)
+		elif event.is_action("DownLeft"):
+			throw(-1,1)
+		
 
 func try_move(dx,dy):
 	
@@ -126,6 +149,50 @@ func try_move(dx,dy):
 	
 	
 	game.update_visuals()
+
+func throw(dx,dy):
+	
+	var game = get_parent()
+	
+	mess_log.append_bbcode("\n You threw a bean.")
+	
+	# Current square
+	
+	var old_x = game.player_tile.x
+	var old_y = game.player_tile.y
+	
+	# If outside map, treat as stone
+	var tile_type = game.tile_stone
+	
+	var blocked = false
+	while blocked == false:
+		var x = old_x + dx
+		var y = old_y + dy
+		if x > 0 && x < game.level_size.x && y > 0 && y < game.level_size.y:
+			tile_type = game.map[x][y]
+		match tile_type:
+			game.tile_floor:
+				for enemy in game.enemies:
+					if enemy.tile.x == x && enemy.tile.y == y:
+						var dmg = max(1,PlayerStats.strength + randi() % 4 + 1)
+						enemy.sprite_node.take_damage(game,dmg)
+						if enemy.sprite_node.dead:
+							enemy.remove()
+							game.enemies.erase(enemy)
+						blocked = true
+						break
+			_:
+				blocked = true
+		if blocked == false:
+			old_x = x
+			old_y = y
+	game.beans.append(Beans.Bean.new(game,old_x,old_y,Selected_Bean.bean_type))
+	game.update_visuals()
+#	print("bean_dict: "+str(Selected_Bean.bean_dict))
+#	print("bean_str: "+str(Selected_Bean.bean_str))
+#	print("bean_type: "+str(Selected_Bean.bean_type))
+	InvDict.removeitem(Selected_Bean.bean_str)
+	Global.game_state = "standard"
 
 func pickup_items():
 	var game = get_node("/root/Game")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://TerrainTileset.tres" type="TileSet" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://UI/Audio.png" type="Texture" id=15]
 [ext_resource path="res://UI/AudioSelected.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=17]
+[ext_resource path="res://UI/Inv_ItemBG.png" type="Texture" id=18]
+[ext_resource path="res://Scripts/SelectedBean.gd" type="Script" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Visibility_Undiscovered.png 0"
@@ -439,6 +441,107 @@ margin_top = -192.0
 margin_right = 200.0
 margin_bottom = -178.0
 text = "[esc]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectedBean" type="ColorRect" parent="Inventory/Inventory"]
+visible = false
+margin_left = -160.0
+margin_top = -128.0
+margin_right = 160.0
+margin_bottom = 32.0
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/Inventory/SelectedBean"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 318.0
+margin_bottom = 158.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inv_ItemBG" type="Sprite" parent="Inventory/Inventory/SelectedBean"]
+position = Vector2( 160, 32 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 18 )
+offset = Vector2( 0, 4 )
+
+[node name="BeanSprite" type="Sprite" parent="Inventory/Inventory/SelectedBean"]
+position = Vector2( 128, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( 0, 4 )
+vframes = 3
+hframes = 4
+
+[node name="ColorRect2" type="ColorRect" parent="Inventory/Inventory/SelectedBean"]
+margin_left = 31.0
+margin_top = 75.0
+margin_right = 289.0
+margin_bottom = 92.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Inventory/Inventory/SelectedBean"]
+margin_left = 32.0
+margin_top = 76.0
+margin_right = 288.0
+margin_bottom = 91.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BeanLabel" type="RichTextLabel" parent="Inventory/Inventory/SelectedBean"]
+margin_left = 32.0
+margin_top = 76.0
+margin_right = 288.0
+margin_bottom = 91.0
+bbcode_enabled = true
+bbcode_text = "Dummy BBCode"
+text = "Dummy BBCode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EatLabel" type="Label" parent="Inventory/Inventory/SelectedBean"]
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+text = "Eat"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThrowLabel" type="Label" parent="Inventory/Inventory/SelectedBean"]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+text = "Throw"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelLabel" type="Label" parent="Inventory/Inventory/SelectedBean"]
+margin_top = 128.0
+margin_right = 320.0
+margin_bottom = 160.0
+text = "Cancel"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

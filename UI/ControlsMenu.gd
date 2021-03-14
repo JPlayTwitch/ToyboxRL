@@ -23,7 +23,9 @@ func _ready():
 	$Wait.text = OS.get_scancode_string(keybinds["Wait"])
 	$Accept.text = OS.get_scancode_string(keybinds["ui_accept"])
 	$Inventory.text = OS.get_scancode_string(keybinds["Inventory"])
-	pass # Replace with function body.
+	$Eat.text = OS.get_scancode_string(keybinds["Eat"])
+	$Throw.text = OS.get_scancode_string(keybinds["Throw"])
+	$Cancel.text = OS.get_scancode_string(keybinds["ui_cancel"])
 
 
 func change_bind(key,value):

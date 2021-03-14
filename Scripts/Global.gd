@@ -5,6 +5,8 @@ var config_file
 
 var keybinds = {}
 
+var game_state = "standard"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

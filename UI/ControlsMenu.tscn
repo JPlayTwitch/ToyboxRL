@@ -11,7 +11,7 @@ font_data = ExtResource( 2 )
 
 [node name="ControlsMenu" type="ColorRect"]
 margin_left = 736.0
-margin_top = 96.0
+margin_top = 64.0
 margin_right = 1120.0
 margin_bottom = 672.0
 color = Color( 0.435294, 0.439216, 0.392157, 1 )
@@ -171,11 +171,15 @@ margin_left = 64.0
 margin_top = 416.0
 margin_right = 128.0
 margin_bottom = 448.0
+rect_pivot_offset = Vector2( 96, 32 )
 focus_mode = 0
 toggle_mode = true
 enabled_focus_mode = 0
 clip_text = true
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 key = "Wait"
 
 [node name="Accept" type="Button" parent="." groups=[
@@ -185,6 +189,7 @@ margin_left = 160.0
 margin_top = 416.0
 margin_right = 224.0
 margin_bottom = 448.0
+rect_pivot_offset = Vector2( 0, 32 )
 focus_mode = 0
 toggle_mode = true
 enabled_focus_mode = 0
@@ -199,6 +204,7 @@ margin_left = 256.0
 margin_top = 416.0
 margin_right = 320.0
 margin_bottom = 448.0
+rect_pivot_offset = Vector2( -96, 32 )
 focus_mode = 0
 toggle_mode = true
 enabled_focus_mode = 0
@@ -209,11 +215,66 @@ __meta__ = {
 }
 key = "Inventory"
 
+[node name="Eat" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 64.0
+margin_top = 480.0
+margin_right = 128.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( 96, 32 )
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Eat"
+
+[node name="Throw" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 160.0
+margin_top = 480.0
+margin_right = 224.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( 0, 32 )
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "Throw"
+
+[node name="Cancel" type="Button" parent="." groups=[
+"Keybind_Buttons",
+]]
+margin_left = 256.0
+margin_top = 480.0
+margin_right = 320.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( -96, 32 )
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+clip_text = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+key = "ui_cancel"
+
 [node name="WaitLabel" type="Label" parent="."]
 margin_left = 64.0
 margin_top = 384.0
 margin_right = 128.0
 margin_bottom = 416.0
+rect_pivot_offset = Vector2( 96, 64 )
 text = "Wait:"
 align = 1
 valign = 1
@@ -226,6 +287,7 @@ margin_left = 160.0
 margin_top = 384.0
 margin_right = 224.0
 margin_bottom = 416.0
+rect_pivot_offset = Vector2( 0, 64 )
 text = "Accept:"
 align = 1
 valign = 1
@@ -238,7 +300,47 @@ margin_left = 256.0
 margin_top = 384.0
 margin_right = 321.0
 margin_bottom = 416.0
+rect_pivot_offset = Vector2( -96, 64 )
 text = "Inventory:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EatLabel" type="Label" parent="."]
+margin_left = 64.0
+margin_top = 448.0
+margin_right = 128.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 96, 64 )
+text = "Eat:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThrowLabel" type="Label" parent="."]
+margin_left = 160.0
+margin_top = 448.0
+margin_right = 224.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 0, 64 )
+text = "Throw:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelLabel" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 448.0
+margin_right = 321.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( -96, 64 )
+text = "Cancel:"
 align = 1
 valign = 1
 __meta__ = {
@@ -250,16 +352,16 @@ position = Vector2( 192, 224 )
 texture = ExtResource( 3 )
 
 [node name="Undo Changes" type="Button" parent="."]
-margin_top = 512.0
+margin_top = 544.0
 margin_right = 192.0
-margin_bottom = 576.0
+margin_bottom = 608.0
 text = "Undo Changes"
 
 [node name="Save Changes" type="Button" parent="."]
 margin_left = 192.0
-margin_top = 512.0
+margin_top = 544.0
 margin_right = 384.0
-margin_bottom = 576.0
+margin_bottom = 608.0
 text = "Save Changes"
 __meta__ = {
 "_edit_use_anchors_": false
