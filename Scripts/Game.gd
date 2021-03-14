@@ -86,6 +86,7 @@ func _ready():
 	BeanCatalogue.assign_beans()
 	Global.show_log = true
 	build_level()
+	BeanCatalogue.connect("turn_advance",self,"_on_Player_turn_advance")
 
 
 

@@ -4,6 +4,7 @@ signal MLogAppend
 
 var mess_log = MessageLog.get_node("MLogText")
 signal CloseInv
+signal turn_advance
 
 
 
@@ -50,7 +51,7 @@ func use_bean(effect_str,game):
 	else:
 		emit_signal("MLogAppend","\n You ate a "+bean_name_untasted[effect]+".\n It must have been a "+bean_name_tasted[effect]+".")
 		tasted[effect] = true
-	print("should be working")
+#	print("should be working")
 	match effect:
 		Effects.BRAWN:
 			emit_signal("MLogAppend","\n You feel stronger.")
@@ -84,3 +85,4 @@ func use_bean(effect_str,game):
 			PlayerStats.strength -= 2
 			game.update_visuals()
 	InvDict.removeitem(effect_str)
+	emit_signal("turn_advance")
