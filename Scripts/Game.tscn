@@ -551,6 +551,7 @@ stream = ExtResource( 13 )
 volume_db = -6.0
 autoplay = true
 bus = "Music"
+[connection signal="MLogAppend" from="." to="MessageLog" method="_on_MLogAppend"]
 [connection signal="turn_advance" from="Player" to="." method="_on_Player_turn_advance"]
 [connection signal="pressed" from="HUD/EndScreen/Button" to="." method="_on_Button_pressed"]
 [connection signal="toggled" from="HUD/AudioButton" to="HUD" method="_on_TextureButton_toggled"]

@@ -76,14 +76,16 @@ onready var tile_chess = tile_map.tile_set.find_tile_by_name("Chessboard")
 var player_tile
 var enemy_pathfinding
 
+signal MLogAppend
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	OS.set_window_size(Vector2(WINDOW_WIDTH,WINDOW_HEIGHT))
 	randomize()
 	BeanCatalogue.assign_beans()
+	Global.show_log = true
 	build_level()
-
 
 
 
@@ -100,6 +102,8 @@ func damage_player(dmg):
 		$HUD/EndScreen/Label.text = "You Lose"
 		$HUD/EndScreen.visible = true
 		$Music.pitch_scale = 0.73
+		emit_signal("MLogAppend","\n You died \n \n \n")
+		Global.show_log = false
 
 func build_level():
 	# start with a blank map
@@ -590,8 +594,10 @@ func set_tile(x, y, type,floor_sprite):
 func _on_Button_pressed():
 	level_num = 0
 	PlayerStats.hp = PlayerStats.max_hp
+	Global.show_log = true
+	MessageLog.get_node("MLogText").clear()
+#	MessageLog.get_node("MLogText").bbcode_text = "New Game \n \n \n"
 	build_level()
-	MessageLog.get_node("MLogText").bbcode_text = "New Game \n \n \n"
 	$HUD/EndScreen.visible = false
 	$Music.pitch_scale = 1
 	# I want to go back to the main menu but the game won't let me

@@ -146,6 +146,8 @@ func try_move(dx,dy):
 		game.tile_amulet:
 			game.get_node("HUD/EndScreen/Label").text = "You Win"
 			game.get_node("HUD/EndScreen").visible = true
+			Global.show_log = false
+			mess_log.append_bbcode("\n You Win! \n \n \n")
 	
 	
 	game.update_visuals()

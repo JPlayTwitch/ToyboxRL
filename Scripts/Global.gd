@@ -7,6 +7,8 @@ var keybinds = {}
 
 var game_state = "standard"
 
+var show_log = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +16,7 @@ func _ready():
 	if config_file.load(filepath) == OK:
 		for key in config_file.get_section_keys("keybinds"):
 			var key_value = config_file.get_value("keybinds",key)
-			print(key," : ",OS.get_scancode_string(key_value))
+#			print(key," : ",OS.get_scancode_string(key_value))
 			
 			keybinds[key] = key_value
 	else:
