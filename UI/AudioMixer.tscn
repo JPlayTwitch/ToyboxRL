@@ -5,7 +5,7 @@
 [ext_resource path="res://UI/Music.png" type="Texture" id=3]
 
 [node name="AudioMixer" type="ColorRect"]
-margin_left = 1056.0
+margin_left = 1152.0
 margin_top = 64.0
 margin_right = 1216.0
 margin_bottom = 416.0
@@ -28,6 +28,7 @@ __meta__ = {
 }
 
 [node name="SoundVol" type="VSlider" parent="."]
+visible = false
 margin_left = 115.0
 margin_top = 32.0
 margin_right = 144.0
@@ -42,6 +43,7 @@ __meta__ = {
 audio_bus_name = "Sounds"
 
 [node name="Audio" type="Sprite" parent="."]
+visible = false
 position = Vector2( 96, 288 )
 texture = ExtResource( 2 )
 centered = false
