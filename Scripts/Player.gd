@@ -65,31 +65,40 @@ func _input(event):
 				emit_signal("select_bean",0)
 		if event.is_action("InvSlot1"):
 			if InvDict.inventory.size()>1:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[1],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",1)
 		if event.is_action("InvSlot2"):
 			if InvDict.inventory.size()>2:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[2],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",2)
 		if event.is_action("InvSlot3"):
 			if InvDict.inventory.size()>3:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[3],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",3)
 		if event.is_action("InvSlot4"):
 			if InvDict.inventory.size()>4:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[4],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",4)
 		if event.is_action("InvSlot5"):
 			if InvDict.inventory.size()>5:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[5],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",5)
 		if event.is_action("InvSlot6"):
 			if InvDict.inventory.size()>6:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[6],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",6)
 		if event.is_action("InvSlot7"):
 			if InvDict.inventory.size()>7:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[7],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",7)
 		if event.is_action("InvSlot8"):
 			if InvDict.inventory.size()>8:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[8],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",8)
 		if event.is_action("InvSlot9"):
 			if InvDict.inventory.size()>9:
-				BeanCatalogue.use_bean(InvDict.inventory.keys()[9],game)
+				Global.game_state = "bean"
+				emit_signal("select_bean",9)
 	if Global.game_state == "throwing":
 		if event.is_action("Left"):
 			throw(-1,0)
