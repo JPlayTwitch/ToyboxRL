@@ -1,6 +1,6 @@
 extends Node
 
-enum EnemyTypes {Teddy,Soldier,Nutcracker,RCCar,Knight,DrinkingBird,Frog}
+enum EnemyTypes {Teddy,Soldier,Nutcracker,RCCar,Knight,DrinkingBird,Frog,Matryoshka,SubMatryoshka,SubSubMatryoshka}
 
 const EnemyTeddy = preload("res://Enemies/Teddy.tscn")
 const EnemySoldier = preload("res://Enemies/Soldier.tscn")
@@ -9,6 +9,9 @@ const EnemyRCCar = preload("res://Enemies/RCCar.tscn")
 const EnemyKnight = preload("res://Enemies/Knight.tscn")
 const DrinkingBird = preload("res://Enemies/DrinkingBird.tscn")
 const Frog = preload("res://Enemies/Frog.tscn")
+const Matryoshka = preload("res://Enemies/Matryoshka.tscn")
+const SubMatryoshka = preload("res://Enemies/SubMatryoshka.tscn")
+const SubSubMatryoshka = preload("res://Enemies/SubSubMatryoshka.tscn")
 
 class Enemy extends Node:
 	var sprite_node
@@ -35,6 +38,12 @@ class Enemy extends Node:
 				sprite_node = DrinkingBird.instance()
 			EnemyTypes.Frog:
 				sprite_node = Frog.instance()
+			EnemyTypes.Matryoshka:
+				sprite_node = Matryoshka.instance()
+			EnemyTypes.SubMatryoshka:
+				sprite_node = SubMatryoshka.instance()
+			EnemyTypes.SubSubMatryoshka:
+				sprite_node = SubSubMatryoshka.instance()
 			_:
 				sprite_node = EnemyTeddy.instance()
 		max_hp = sprite_node.max_hp

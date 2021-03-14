@@ -11,6 +11,7 @@ export(int) var vision = 10
 export(int) var evasion = 0
 var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+var type = "DrinkingBird"
 
 
 func act(game,me):
