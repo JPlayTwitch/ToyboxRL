@@ -143,7 +143,7 @@ func try_move(dx,dy):
 					var dmg = max(1,PlayerStats.strength + randi() % 4 + 1)
 					enemy.sprite_node.take_damage(game,dmg)
 					if enemy.sprite_node.dead:
-						emit_signal("spawn_enemy",enemy.sprite_node.type,x,y)
+						emit_signal("spawn_enemy",enemy.sprite_node.type,enemy.tile.x,enemy.tile.y)
 						enemy.remove()
 						game.enemies.erase(enemy)
 					blocked = true
@@ -190,7 +190,7 @@ func throw(dx,dy):
 						var dmg = max(1,PlayerStats.strength + randi() % 4 + 1)
 						enemy.sprite_node.take_damage(game,dmg)
 						if enemy.sprite_node.dead:
-							emit_signal("spawn_enemy",enemy.sprite_node.type,x,y)
+							emit_signal("spawn_enemy",enemy.sprite_node.type,enemy.tile.x,enemy.tile.y)
 							enemy.remove()
 							game.enemies.erase(enemy)
 						blocked = true
