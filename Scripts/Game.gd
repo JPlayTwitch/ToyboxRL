@@ -213,7 +213,8 @@ func build_level():
 	
 	# Place Enemies
 	var num_enemies = LEVEL_ENEMY_PTS[level_num]
-	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
+#	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
+	var enemy_l0 = [Enemies.EnemyTypes.Matryoshka]
 	var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.RCCar]
 	var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.DrinkingBird]
 	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.Frog,Enemies.EnemyTypes.Frog]
@@ -596,6 +597,16 @@ func set_tile(x, y, type,floor_sprite):
 		tile_floor:
 			clear_path(Vector2(x,y))
 
+#func extra_enemy_spawn(previous_enemy,x,y):
+#	print("spawn signal received")
+#	match previous_enemy:
+#		"Matryoshka":
+#			var enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.SubMatryoshka,x,y)
+#			enemies.append(enemy)
+#		"SubMatryoshka":
+#			var enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.SubSubMatryoshka,x,y)
+#			enemies.append(enemy)
+
 func _on_Button_pressed():
 	level_num = 0
 	PlayerStats.hp = PlayerStats.max_hp
@@ -613,3 +624,16 @@ func _on_Player_turn_advance():
 	for enemy in enemies:
 		enemy.sprite_node.act(self,enemy)
 	update_visuals()
+
+
+func _on_Player_spawn_enemy(previous_enemy,x,y):
+	print("spawn signal received")
+	match previous_enemy:
+		"Matryoshka":
+			var enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.SubMatryoshka,x,y)
+			enemies.append(enemy)
+		"SubMatryoshka":
+			var enemy = Enemies.Enemy.new(self,Enemies.EnemyTypes.SubSubMatryoshka,x,y)
+			enemies.append(enemy)
+		_:
+			print("this enemy type has no death effect")

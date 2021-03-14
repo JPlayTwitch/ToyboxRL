@@ -13,6 +13,7 @@ var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 var has_target = false
 var target_point
+var type = "RCCar"
 
 
 func act(game,me):

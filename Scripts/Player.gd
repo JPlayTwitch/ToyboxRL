@@ -4,9 +4,11 @@ onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
 onready var InvUI = get_node("/root/Game/Inventory/Inventory")
 onready var Selected_Bean = get_node("/root/Game/Inventory/Inventory/SelectedBean")
 var Beans = preload("res://Items/Beans.gd")
+var Enemies = preload("res://Scripts/Enemies.gd")
 
 signal turn_advance
 signal select_bean
+signal spawn_enemy
 
 func _input(event):
 	var game = get_parent()
@@ -141,6 +143,7 @@ func try_move(dx,dy):
 					var dmg = max(1,PlayerStats.strength + randi() % 4 + 1)
 					enemy.sprite_node.take_damage(game,dmg)
 					if enemy.sprite_node.dead:
+						emit_signal("spawn_enemy",enemy.sprite_node.type,x,y)
 						enemy.remove()
 						game.enemies.erase(enemy)
 					blocked = true
@@ -187,6 +190,7 @@ func throw(dx,dy):
 						var dmg = max(1,PlayerStats.strength + randi() % 4 + 1)
 						enemy.sprite_node.take_damage(game,dmg)
 						if enemy.sprite_node.dead:
+							emit_signal("spawn_enemy",enemy.sprite_node.type,x,y)
 							enemy.remove()
 							game.enemies.erase(enemy)
 						blocked = true

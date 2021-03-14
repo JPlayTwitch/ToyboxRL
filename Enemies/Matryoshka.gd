@@ -2,16 +2,16 @@ extends Sprite
 
 #export onready var stats = $Stats
 
-export(int) var max_hp = 20
+export(int) var max_hp = 25
 onready var hp = max_hp
-export(int) var attack_dice = 3
-export(int) var strength = 2
-export(int) var weighting = 2
+export(int) var attack_dice = 4
+export(int) var strength = 5
+export(int) var weighting = 17
 export(int) var vision = 10
-export(int) var evasion = 10
+export(int) var evasion = 5
 var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
-var type = "Teddy"
+var type = "Matryoshka"
 
 
 func act(game,me):
@@ -26,10 +26,10 @@ func act(game,me):
 				var dmg = randi() % attack_dice + strength
 				var hit = randi() % 100 >= PlayerStats.evasion
 				if hit:
-					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] clawed at you for [color=#ff0000]" + str(dmg) + "[/color] damage")
+					mess_log.append_bbcode("\n [color=#7d0300]Matryoshka[/color] bopped you for [color=#ff0000]" + str(dmg) + "[/color] damage")
 					game.damage_player(dmg)
 				else:
-					mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] swiped the air fruitlessly")
+					mess_log.append_bbcode("\n [color=#7d0300]Matryoshka[/color] wobbled menacingly")
 				me.sprite_node.frame = 1
 				var t = Timer.new()
 				t.set_wait_time(0.2)
@@ -66,11 +66,10 @@ func take_damage(game,dmg):
 	var hit = randi() % 100 >= evasion
 	if hit:
 		hp = max(0, hp-dmg)
-		mess_log.append_bbcode("\n You hit [color=#bd9521]Teddy Bear[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
+		mess_log.append_bbcode("\n You hit [color=#7d0300]Matryoshka[/color] for [color=#00ff00]" + str(dmg) + "[/color] damage")
 		
 		if hp == 0:
-			mess_log.append_bbcode("\n [color=#bd9521]Teddy Bear[/color] died")
-		if hp == 0:
-			dead = true#
+			mess_log.append_bbcode("\n [color=#7d0300]Matryoshka[/color] died")
+			dead = true
 	else:
-		mess_log.append_bbcode("\n You missed the [color=#bd9521]Teddy Bear[/color]")
+		mess_log.append_bbcode("\n You missed the [color=#7d0300]Matryoshka[/color]")

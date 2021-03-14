@@ -12,6 +12,7 @@ export(int) var evasion = 10
 export(int) var attack_range = 5
 var dead = false
 onready var mess_log = get_node("/root/Game/MessageLog/MLogText")
+var type = "Soldier"
 
 func act(game,me):
 	# if in line of sight
