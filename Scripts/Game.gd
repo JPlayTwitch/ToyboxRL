@@ -30,7 +30,8 @@ var Player = PlayerScn.instance()
 
 # Enemies
 var Enemies = preload("res://Scripts/Enemies.gd")
-const LEVEL_ENEMY_PTS = [19,45,81,97,130]
+#const LEVEL_ENEMY_PTS = [19,45,81,97,130]
+const LEVEL_ENEMY_PTS = [19,45,141,197,280] #v1.0.2 rebalancing
 
 
 

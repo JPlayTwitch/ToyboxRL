@@ -59,9 +59,10 @@ func use_bean(effect_str,game):
 			game.update_visuals()
 		Effects.ENDURANCE:
 			emit_signal("MLogAppend","\n You feel more resilient.")
-			var hp_increase = int(PlayerStats.max_hp*0.2)
-			PlayerStats.max_hp = PlayerStats.max_hp + hp_increase
-			PlayerStats.hp = min(PlayerStats.hp + hp_increase,PlayerStats.max_hp)
+#			var hp_increase = int(PlayerStats.max_hp*0.2)
+#			PlayerStats.max_hp = PlayerStats.max_hp + hp_increase
+#			PlayerStats.hp = min(PlayerStats.hp + hp_increase,PlayerStats.max_hp)
+			PlayerStats.max_hp += 150 #v1.0.2 rebalancing - flat HP up, no heal
 			game.update_visuals()
 		Effects.PERPLEXITY:
 			emit_signal("MLogAppend","\n You feel confused.")
@@ -74,7 +75,7 @@ func use_bean(effect_str,game):
 			game.update_visuals()
 		Effects.HEALING:
 			emit_signal("MLogAppend","\n You feel much better.")
-			PlayerStats.hp = min(PlayerStats.hp+int(0.5*PlayerStats.max_hp),PlayerStats.max_hp)
+			PlayerStats.hp = min(PlayerStats.hp+int(0.3*PlayerStats.max_hp),PlayerStats.max_hp) #v1.0.2 rebalancing - 30% heal instead of 50%
 			game.update_visuals()
 		Effects.LITHENESS:
 			emit_signal("MLogAppend","\n You feel positively limber.")
