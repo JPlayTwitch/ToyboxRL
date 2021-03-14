@@ -216,8 +216,8 @@ func build_level():
 	var enemy_l0 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier]
 	var enemy_l1 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.RCCar]
 	var enemy_l2 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.DrinkingBird]
-	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
-	var enemy_l4 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar]
+	var enemy_l3 = [Enemies.EnemyTypes.Teddy,Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.Frog,Enemies.EnemyTypes.Frog]
+	var enemy_l4 = [Enemies.EnemyTypes.Soldier,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.Nutcracker,Enemies.EnemyTypes.RCCar,Enemies.EnemyTypes.Frog]
 	while num_enemies > 0:
 		var usable_room = false
 		var emergency_room_break = 0 # to stop the fringe case where every room is a special room and enemies can't spawn

@@ -1,6 +1,6 @@
 extends Node
 
-enum EnemyTypes {Teddy,Soldier,Nutcracker,RCCar,Knight,DrinkingBird}
+enum EnemyTypes {Teddy,Soldier,Nutcracker,RCCar,Knight,DrinkingBird,Frog}
 
 const EnemyTeddy = preload("res://Enemies/Teddy.tscn")
 const EnemySoldier = preload("res://Enemies/Soldier.tscn")
@@ -8,6 +8,7 @@ const EnemyNutcracker = preload("res://Enemies/Nutcracker.tscn")
 const EnemyRCCar = preload("res://Enemies/RCCar.tscn")
 const EnemyKnight = preload("res://Enemies/Knight.tscn")
 const DrinkingBird = preload("res://Enemies/DrinkingBird.tscn")
+const Frog = preload("res://Enemies/Frog.tscn")
 
 class Enemy extends Node:
 	var sprite_node
@@ -32,6 +33,8 @@ class Enemy extends Node:
 				sprite_node = EnemyKnight.instance()
 			EnemyTypes.DrinkingBird:
 				sprite_node = DrinkingBird.instance()
+			EnemyTypes.Frog:
+				sprite_node = Frog.instance()
 			_:
 				sprite_node = EnemyTeddy.instance()
 		max_hp = sprite_node.max_hp
